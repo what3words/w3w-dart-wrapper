@@ -12,7 +12,7 @@ The artifact is available through [pub.dev](https://pub.dev/packages/what3words)
 
 ```
 dependencies:
- what3words: 3.0.0
+ what3words: 3.0.1
 ``` 
 
 ## Documentation

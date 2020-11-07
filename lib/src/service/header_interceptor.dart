@@ -4,7 +4,7 @@ import 'dart:io' show Platform;
 
 class HeaderInterceptor implements RequestInterceptor {
   // This version must be updated in tandem with the pubspec version.
-  static const String APP_VERSION = '3.0.0';
+  static const String APP_VERSION = '3.0.1';
 
   static final String auth_header = 'X-API-KEY';
   static final String w3w_wrapper = 'X-W3W-Wrapper';
