@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:chopper/chopper.dart';
-import 'dart:io' show Platform;
+import 'package:os_detect/os_detect.dart' as Platform;
 
 class HeaderInterceptor implements RequestInterceptor {
   // This version must be updated in tandem with the pubspec version.
@@ -20,7 +20,7 @@ class HeaderInterceptor implements RequestInterceptor {
         _userAgent = getUserAgent();
 
   static String getUserAgent() {
-    return 'what3words-Dart/${APP_VERSION} (Dart ${Platform.version}; ${Platform.operatingSystem}; ${Platform.operatingSystemVersion};)';
+    return 'what3words-Dart/${APP_VERSION} (${Platform.operatingSystem}; ${Platform.operatingSystemVersion})';
   }
 
   @override
