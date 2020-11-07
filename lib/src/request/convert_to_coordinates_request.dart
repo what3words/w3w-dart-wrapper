@@ -1,0 +1,35 @@
+import '../response/location.dart';
+import 'abstract_builder.dart';
+import '../service/what3words_v3.dart';
+import 'request.dart';
+
+class ConvertToCoordinatesRequest extends Request<Location> {
+  final String words;
+
+  ConvertToCoordinatesRequest._builder(
+      ConvertToCoordinatesRequestBuilder builder)
+      : words = builder._words,
+        super(builder.api);
+
+  Future<Location> execute() async {
+    return await super
+        .call(api.what3words().convertToCoordinates, Location(), [words]);
+  }
+}
+
+/// Builder for `convert-to-coordinates` API requests
+class ConvertToCoordinatesRequestBuilder
+    extends AbstractBuilder<Future<Location>> {
+  final String _words;
+
+  ConvertToCoordinatesRequestBuilder(What3WordsV3 api, this._words)
+      : super(api);
+
+  ///Execute the API call as represented by the values set within this [ConvertToCoordinatesRequestBuilder]
+  ///
+  ///return an [Future<Location>] representing the response from the what3words API
+  @override
+  Future<Location> execute() {
+    return ConvertToCoordinatesRequest._builder(this).execute();
+  }
+}

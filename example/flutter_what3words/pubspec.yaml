@@ -1,0 +1,21 @@
+name: flutter_what3words
+description: A sample Flutter application demonstrating use of the what3words Dart API wrapper
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  what3words: ^3.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+
