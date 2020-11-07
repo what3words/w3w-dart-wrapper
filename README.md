@@ -8,7 +8,7 @@ To obtain an API key, please visit [https://what3words.com/select-plan](https://
 
 ## Installation
 
-The artifact is available through [pub.dev](https://pub.dev/documentation/shelf/latest/). Update your `pubspec.yaml` file with 
+The artifact is available through [pub.dev](https://pub.dev/packages/what3words). Update your `pubspec.yaml` file with 
 
 ```
 dependencies:
