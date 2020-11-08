@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import '../response/api_error.dart';
 import '../response/what3words_error.dart';
 import '../response/api_response.dart';
@@ -30,14 +28,15 @@ class Request<T extends Response<T>> {
 
         apiResponse.setAPIError(apiError);
       }
-    } on SocketException catch (e) {
-      apiResponse = APIResponse(null);
-      var apiError = APIError('NetworkError', e.toString());
-      apiResponse.setAPIError(apiError);
     } catch (e) {
       apiResponse = APIResponse(null);
-      var apiError = APIError('UnknownError', e.toString());
-      apiResponse.setAPIError(apiError);
+      if (e.runtimeType.toString() == 'SocketException' ||
+          e.runtimeType.toString() == 'ClientException' ||
+          e.runtimeType.toString() == 'XMLHttpRequest') {
+        apiResponse.setAPIError(APIError('NetworkError', e.toString()));
+      } else {
+        apiResponse.setAPIError(APIError('UnknownError', e.toString()));
+      }
     }
     var apiError = apiResponse.getAPIError();
     if (apiError != null) {
