@@ -1,3 +1,7 @@
+## 3.0.3
+
+- Check for network error in platform agnostic way.
+
 ## 3.0.2
 
 - Obtain platform info in an platform independent manner

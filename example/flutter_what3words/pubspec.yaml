@@ -10,7 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  what3words: ^3.0.2
+  what3words: ^3.0.3
 
 dev_dependencies:
   flutter_test:
