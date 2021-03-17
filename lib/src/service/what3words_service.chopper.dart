@@ -80,4 +80,73 @@ class _$What3WordsV3Service extends What3WordsV3Service {
     final $request = Request('GET', $url, client.baseUrl, parameters: $params);
     return client.send<Autosuggest, Autosuggest>($request);
   }
+
+  @override
+  Future<Response<AutosuggestWithCoordinates>> autosuggestWithCoordinates(
+      String input,
+      String nResults,
+      String focus,
+      String nFocusResults,
+      String clipToCountry,
+      String clipToBoundingBox,
+      String clipToCircle,
+      String clipToPolygon,
+      String inputType,
+      String lang,
+      String preferLand) {
+    final $url = 'autosuggest-with-coordinates';
+    final $params = <String, dynamic>{
+      'input': input,
+      'n-results': nResults,
+      'focus': focus,
+      'n-focus-results': nFocusResults,
+      'clip-to-country': clipToCountry,
+      'clip-to-bounding-box': clipToBoundingBox,
+      'clip-to-circle': clipToCircle,
+      'clip-to-polygon': clipToPolygon,
+      'input-type': inputType,
+      'language': lang,
+      'prefer-land': preferLand
+    };
+    final $request = Request('GET', $url, client.baseUrl, parameters: $params);
+    return client
+        .send<AutosuggestWithCoordinates, AutosuggestWithCoordinates>($request);
+  }
+
+  @override
+  Future<Response<String>> autosuggestSelection(
+      String rawInput,
+      String sourceApi,
+      String selection,
+      int rank,
+      String nResults,
+      String focus,
+      String nFocusResults,
+      String clipToCountry,
+      String clipToBoundingBox,
+      String clipToCircle,
+      String clipToPolygon,
+      String inputType,
+      String lang,
+      String preferLand) {
+    final $url = 'autosuggest-selection';
+    final $params = <String, dynamic>{
+      'raw-input': rawInput,
+      'source-api': sourceApi,
+      'selection': selection,
+      'rank': rank,
+      'n-results': nResults,
+      'focus': focus,
+      'n-focus-results': nFocusResults,
+      'clip-to-country': clipToCountry,
+      'clip-to-bounding-box': clipToBoundingBox,
+      'clip-to-circle': clipToCircle,
+      'clip-to-polygon': clipToPolygon,
+      'input-type': inputType,
+      'language': lang,
+      'prefer-land': preferLand
+    };
+    final $request = Request('GET', $url, client.baseUrl, parameters: $params);
+    return client.send<String, String>($request);
+  }
 }

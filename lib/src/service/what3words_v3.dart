@@ -1,3 +1,8 @@
+import 'package:what3words/src/request/autosuggest_options.dart';
+import 'package:what3words/src/request/autosuggest_selection_request.dart';
+import 'package:what3words/src/request/autosuggest_with_coordinates_request.dart';
+import 'package:what3words/src/response/autosuggest.dart';
+
 import '../request/autosuggest_request.dart';
 import '../request/available_languages_request.dart';
 import '../request/bounding_box.dart';
@@ -87,10 +92,28 @@ class What3WordsV3 {
   ///
   ///[input] The full or partial 3 word address to obtain suggestions for. At minimum this must be the first two complete
   ///words plus at least one character from the third word.
+  ///[options] The autosuggest options, check available options here https://docs.what3words.com/api/v3/#autosuggest
   ///
   ///returns a [AutosuggestRequestBuilder] instance suitable for invoking a `autosuggest` API request
-  AutosuggestRequestBuilder autosuggest(String input) {
-    return AutosuggestRequestBuilder(this, input);
+  AutosuggestRequestBuilder autosuggest(String input, {AutosuggestOptions options}) {
+    return AutosuggestRequestBuilder(this, input, options);
+  }
+
+  ///AutoSuggestWithCoordinates can take a slightly incorrect 3 word address, and suggest a list of valid 3 word addresses including coordinates. It has powerful
+  ///features which can, for example, optionally limit results to a country or area, and prefer results which are near the user.
+  ///For full details, please see the complete API documentation at https://docs.what3words.com/api/v3/#autosuggest
+  ///
+  ///[input] The full or partial 3 word address to obtain suggestions for. At minimum this must be the first two complete
+  ///words plus at least one character from the third word.
+  ///[options] The autosuggest options, check available options here https://docs.what3words.com/api/v3/#autosuggest
+  ///
+  ///returns a [AutosuggestWithCoordinatesRequestBuilder] instance suitable for invoking a `autosuggest` API request
+  AutosuggestWithCoordinatesRequestBuilder autosuggestWithCoordinates(String input, {AutosuggestOptions options}) {
+    return AutosuggestWithCoordinatesRequestBuilder(this, input, options);
+  }
+  
+  AutosuggestSelectionRequestBuilder autosuggestSelection(String rawInput, String sourceApi, SuggestionWithCoordinates selectedSuggestion, {AutosuggestOptions options}) {
+    return AutosuggestSelectionRequestBuilder(this, rawInput, sourceApi, selectedSuggestion, options);
   }
 
   What3WordsV3Service what3words() {

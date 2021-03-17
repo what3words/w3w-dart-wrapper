@@ -9,3 +9,6 @@ build/
 doc/api/
 
 .vscode/
+
+# Misc
+*.idea

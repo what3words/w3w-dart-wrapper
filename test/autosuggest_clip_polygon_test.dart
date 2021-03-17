@@ -1,4 +1,5 @@
 import 'package:test/test.dart';
+import 'package:what3words/src/request/autosuggest_options.dart';
 import 'package:what3words/what3words.dart';
 import 'dart:io' show Platform;
 
@@ -11,9 +12,10 @@ void main() {
     var p2 = Coordinates(53, 0);
     var p3 = Coordinates(51, 1);
 
+    var options = AutosuggestOptions().setClipToPolygon([p1, p2, p3, p1]);
     var autosuggest = await api
-        .autosuggest('index.home.ra')
-        .clipToPolygon([p1, p2, p3, p1]).execute();
+        .autosuggest('index.home.ra', options: options)
+        .execute();
     expect(autosuggest.isSuccessful(), true);
 
     var suggestions = autosuggest.suggestions;
@@ -34,9 +36,10 @@ void main() {
     var p2 = Coordinates(53, 0);
     var p3 = Coordinates(51, 1);
 
+    var options = AutosuggestOptions().setClipToPolygon([p1, p2, p3]);
     var autosuggest = await api
-        .autosuggest('index.home.ra')
-        .clipToPolygon([p1, p2, p3]).execute();
+        .autosuggest('index.home.ra', options: options)
+        .execute();
 
     expect(autosuggest.isSuccessful(), false);
 
@@ -50,9 +53,10 @@ void main() {
     var p2 = Coordinates(53, 0);
     var p3 = Coordinates(51, 181);
 
+    var options = AutosuggestOptions().setClipToPolygon([p1, p2, p3, p1]);
     var autosuggest = await api
-        .autosuggest('index.home.ra')
-        .clipToPolygon([p1, p2, p3, p1]).execute();
+        .autosuggest('index.home.ra', options: options)
+        .execute();
     expect(autosuggest.isSuccessful(), true);
 
     var suggestions = autosuggest.suggestions;

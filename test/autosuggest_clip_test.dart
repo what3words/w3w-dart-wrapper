@@ -1,4 +1,5 @@
 import 'package:test/test.dart';
+import 'package:what3words/src/request/autosuggest_options.dart';
 import 'package:what3words/what3words.dart';
 import 'dart:io' show Platform;
 
@@ -6,17 +7,17 @@ void main() {
   var api = What3WordsV3(Platform.environment['W3W_API_KEY']);
 
   test('testSimpleCircleClip', () async {
+    var options = AutosuggestOptions().setClipToCircle(Coordinates(-90.000000, 360.0), 100);
     var autosuggest = await api
-        .autosuggest('index.home.ra')
-        .clipToCircle(Coordinates(-90.000000, 360.0), 100)
+        .autosuggest('index.home.ra', options: options)
         .execute();
     expect(autosuggest.isSuccessful(), true);
   });
 
   test('testSimpleCircleClipLatCannotWrap', () async {
+    var options = AutosuggestOptions().setClipToCircle(Coordinates(-91.000000, 360.0), 100);
     var autosuggest = await api
-        .autosuggest('index.home.ra')
-        .clipToCircle(Coordinates(-91.000000, 360.0), 100)
+        .autosuggest('index.home.ra', options: options)
         .execute();
     expect(autosuggest.isSuccessful(), false);
 
@@ -25,9 +26,9 @@ void main() {
   });
 
   test('testSimpleCircleClipLatBigDistance', () async {
+    var options = AutosuggestOptions().setClipToCircle(Coordinates(0.000000, 0.0), 10000000);
     var autosuggest = await api
-        .autosuggest('index.home.ra')
-        .clipToCircle(Coordinates(0.000000, 0.0), 10000000)
+        .autosuggest('index.home.ra', options: options)
         .execute();
     expect(autosuggest.isSuccessful(), true);
   });
@@ -37,9 +38,9 @@ void main() {
     var ne = Coordinates(53, 2);
     var bbox = BoundingBox(sw, ne);
 
+    var options = AutosuggestOptions().setClipToBoundingBox(bbox);
     var autosuggest = await api
-        .autosuggest('index.home.ra')
-        .clipToBoundingBox(bbox)
+        .autosuggest('index.home.ra', options: options)
         .execute();
     expect(autosuggest.isSuccessful(), true);
 
@@ -59,9 +60,9 @@ void main() {
     var ne = Coordinates(50, -5);
 
     var bbox = BoundingBox(sw, ne);
+    var options = AutosuggestOptions().setClipToBoundingBox(bbox);
     var autosuggest = await api
-        .autosuggest('index.home.ra')
-        .clipToBoundingBox(bbox)
+        .autosuggest('index.home.ra', options: options)
         .execute();
     expect(autosuggest.isSuccessful(), true);
 
@@ -81,9 +82,9 @@ void main() {
     var ne = Coordinates(53, 3544);
 
     var bbox = BoundingBox(sw, ne);
+    var options = AutosuggestOptions().setClipToBoundingBox(bbox);
     var autosuggest = await api
-        .autosuggest('index.home.ra')
-        .clipToBoundingBox(bbox)
+        .autosuggest('index.home.ra', options: options)
         .execute();
     expect(autosuggest.isSuccessful(), true);
 
@@ -103,9 +104,9 @@ void main() {
     var ne = Coordinates(53, 355);
 
     var bbox = BoundingBox(sw, ne);
+    var options = AutosuggestOptions().setClipToBoundingBox(bbox);
     var autosuggest = await api
-        .autosuggest('index.home.ra')
-        .clipToBoundingBox(bbox)
+        .autosuggest('index.home.ra', options: options)
         .execute();
     expect(autosuggest.isSuccessful(), true);
 
@@ -125,9 +126,9 @@ void main() {
     var ne = Coordinates(230, 2);
 
     var bbox = BoundingBox(sw, ne);
+    var options = AutosuggestOptions().setClipToBoundingBox(bbox);
     var autosuggest = await api
-        .autosuggest('index.home.ra')
-        .clipToBoundingBox(bbox)
+        .autosuggest('index.home.ra', options: options)
         .execute();
     expect(autosuggest.isSuccessful(), false);
 
@@ -136,8 +137,10 @@ void main() {
   });
 
   test('clipToCountryThatDoesNotExist', () async {
+    var options = AutosuggestOptions().setClipToCountry(['ZX']);
     var autosuggest =
-        await api.autosuggest('index.home.raf').clipToCountry(['ZX']).execute();
+        await api.autosuggest('index.home.raf', options: options)
+            .execute();
 
     expect(autosuggest.isSuccessful(), true);
 
@@ -153,9 +156,10 @@ void main() {
   });
 
   test('clipToCountryThatDoesNotExist', () async {
+    var options = AutosuggestOptions().setClipToCountry(['ZXC']);
     var autosuggest = await api
-        .autosuggest('index.home.raf')
-        .clipToCountry(['ZXC']).execute();
+        .autosuggest('index.home.raf', options: options)
+        .execute();
 
     expect(autosuggest.isSuccessful(), false);
 

@@ -1,3 +1,5 @@
+import 'package:what3words/src/response/empty_response.dart';
+
 import '../response/api_error.dart';
 import '../response/what3words_error.dart';
 import '../response/api_response.dart';
@@ -52,6 +54,56 @@ class Request<T extends Response<T>> {
     entity ??= emptyEntity;
     entity.setResponse(apiResponse);
 
+    return entity;
+  }
+}
+
+class EmptyRequest {
+  What3WordsV3 api;
+  EmptyRequest(this.api);
+
+  Future<EmptyResponse> call(Function f, List params) async {
+    EmptyAPIResponse apiResponse;
+
+    try {
+      var response = await Function.apply(f, params);
+      apiResponse = EmptyAPIResponse(response);
+
+      if (!apiResponse.isSuccessful()) {
+        Map errorResponse = response.error;
+
+        var apiError;
+        try {
+          apiError = APIError(errorResponse['error']['code'],
+              errorResponse['error']['message']);
+        } catch (e) {
+          apiError = APIError('UnknownError', response.error.toString());
+        }
+
+        apiResponse.setAPIError(apiError);
+      }
+    } catch (e) {
+      apiResponse = EmptyAPIResponse(null);
+      if (e.runtimeType.toString() == 'SocketException' ||
+          e.runtimeType.toString() == 'ClientException' ||
+          e.runtimeType.toString() == 'XMLHttpRequest') {
+        apiResponse.setAPIError(APIError('NetworkError', e.toString()));
+      } else {
+        apiResponse.setAPIError(APIError('UnknownError', e.toString()));
+      }
+    }
+    var apiError = apiResponse.getAPIError();
+    if (apiError != null) {
+      // look for the error within the available error enums
+      var what3wordsError = What3WordsError.get(apiError.code);
+
+      what3wordsError.message = apiError.message;
+
+      apiResponse.setError(what3wordsError);
+    }
+
+    var entity = EmptyResponse();
+    entity.setResponse(apiResponse);
     return entity;
   }
 }
