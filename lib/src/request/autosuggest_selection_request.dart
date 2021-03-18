@@ -25,8 +25,8 @@ class AutosuggestSelectionRequest extends EmptyRequest {
       AutosuggestSelectionRequestBuilder builder)
       : rawInput = builder._rawInput,
         sourceApi = builder._sourceApi,
-        selection = builder._selectedSuggestion.words,
-        rank = builder._selectedSuggestion.rank,
+        selection = builder._words,
+        rank = builder._rank,
         nResults = builder._options.nResults,
         focus = builder._options.focus,
         nFocusResults = builder._options.nFocusResults,
@@ -64,11 +64,12 @@ class AutosuggestSelectionRequestBuilder
     extends AbstractBuilder<Future<EmptyResponse>> {
   final String _rawInput;
   final String _sourceApi;
-  final SuggestionWithCoordinates _selectedSuggestion;
+  final String _words;
+  final int _rank;
   final AutosuggestOptions _options;
 
   AutosuggestSelectionRequestBuilder(What3WordsV3 api, this._rawInput,
-      this._sourceApi, this._selectedSuggestion, this._options)
+      this._sourceApi, this._words, this._rank, this._options)
       : super(api);
 
   ///Execute the API call as represented by the values set within this [ConvertTo3WARequestBuilder]

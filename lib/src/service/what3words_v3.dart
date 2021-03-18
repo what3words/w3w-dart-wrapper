@@ -111,9 +111,18 @@ class What3WordsV3 {
   AutosuggestWithCoordinatesRequestBuilder autosuggestWithCoordinates(String input, {AutosuggestOptions options}) {
     return AutosuggestWithCoordinatesRequestBuilder(this, input, options);
   }
-  
-  AutosuggestSelectionRequestBuilder autosuggestSelection(String rawInput, String sourceApi, SuggestionWithCoordinates selectedSuggestion, {AutosuggestOptions options}) {
-    return AutosuggestSelectionRequestBuilder(this, rawInput, sourceApi, selectedSuggestion, options);
+
+  ///autosuggest-selection enables simple reporting for what3words address selections in accounts.what3words.com.
+  ///It should be called once in conjunction with autosuggest or autosuggest-with-coordinates.
+  ///when an end user picks a what3words address from the suggestions presented to them.
+  ///[rawInput] The full or partial 3 word address used on the autosuggest or autosuggest-with-coordinates call.
+  ///[sourceApi] The source of the selected autosuggest, can be 'text' or 'voice'.
+  ///[words] The 3 word address of the selected suggestion.
+  ///[rank] The rank of the selected suggestion.
+  ///[options] The autosuggest options used on the autosuggest or autosuggest-with-coordinates call.
+  ///returns a [AutosuggestWithCoordinatesRequestBuilder] instance suitable for invoking a `autosuggest` API request
+  AutosuggestSelectionRequestBuilder autosuggestSelection(String rawInput, String sourceApi, String words, int rank, {AutosuggestOptions options}) {
+    return AutosuggestSelectionRequestBuilder(this, rawInput, sourceApi, words, rank, options);
   }
 
   What3WordsV3Service what3words() {
