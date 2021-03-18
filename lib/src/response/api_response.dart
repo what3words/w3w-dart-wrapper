@@ -32,26 +32,3 @@ class APIResponse<T> {
     return apiError;
   }
 }
-
-class EmptyAPIResponse {
-  Response response;
-  APIError apiError;
-  What3WordsError error;
-
-  EmptyAPIResponse(this.response);
-
-  bool isSuccessful() {
-    return response != null && response.isSuccessful;
-  }
-  void setError(What3WordsError error) {
-    this.error = error;
-  }
-
-  void setAPIError(APIError apiError) {
-    this.apiError = apiError;
-  }
-
-  APIError getAPIError() {
-    return apiError;
-  }
-}

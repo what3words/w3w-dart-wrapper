@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:chopper/chopper.dart';
-import 'package:what3words/src/response/empty_response.dart';
 import 'package:what3words/src/response/location.dart';
 import 'header_interceptor.dart';
 import 'json_to_type_converter.dart';

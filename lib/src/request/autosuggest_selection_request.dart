@@ -1,5 +1,5 @@
 import 'package:what3words/src/request/request.dart';
-import 'package:what3words/src/response/empty_response.dart';
+import 'package:what3words/src/response/response.dart';
 
 import '../../what3words.dart';
 import 'abstract_builder.dart';
@@ -39,7 +39,7 @@ class AutosuggestSelectionRequest extends EmptyRequest {
         preferLand = builder._options.preferLand,
         super(builder.api);
 
-  Future<EmptyResponse> execute() async {
+  Future<Response<String>> execute() async {
     return await super.call(api.what3words().autosuggestSelection, [
       rawInput,
       sourceApi,
@@ -61,7 +61,7 @@ class AutosuggestSelectionRequest extends EmptyRequest {
 
 /// Builder for `autosuggest-with-coordinates` API requests
 class AutosuggestSelectionRequestBuilder
-    extends AbstractBuilder<Future<EmptyResponse>> {
+    extends AbstractBuilder<Future<Response<String>>> {
   final String _rawInput;
   final String _sourceApi;
   final String _words;
@@ -76,7 +76,7 @@ class AutosuggestSelectionRequestBuilder
   ///
   ///return an [Future<Autosuggest>] representing the response from the what3words API
   @override
-  Future<EmptyResponse> execute() {
+  Future<Response<String>> execute() {
     return AutosuggestSelectionRequest._builder(this).execute();
   }
 }

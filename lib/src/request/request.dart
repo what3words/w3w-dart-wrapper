@@ -1,5 +1,3 @@
-import 'package:what3words/src/response/empty_response.dart';
-
 import '../response/api_error.dart';
 import '../response/what3words_error.dart';
 import '../response/api_response.dart';
@@ -62,12 +60,12 @@ class EmptyRequest {
   What3WordsV3 api;
   EmptyRequest(this.api);
 
-  Future<EmptyResponse> call(Function f, List params) async {
-    EmptyAPIResponse apiResponse;
+  Future<Response<String>> call(Function f, List params) async {
+    APIResponse<String> apiResponse;
 
     try {
       var response = await Function.apply(f, params);
-      apiResponse = EmptyAPIResponse(response);
+      apiResponse = APIResponse(response);
 
       if (!apiResponse.isSuccessful()) {
         Map errorResponse = response.error;
@@ -83,7 +81,7 @@ class EmptyRequest {
         apiResponse.setAPIError(apiError);
       }
     } catch (e) {
-      apiResponse = EmptyAPIResponse(null);
+      apiResponse = APIResponse(null);
       if (e.runtimeType.toString() == 'SocketException' ||
           e.runtimeType.toString() == 'ClientException' ||
           e.runtimeType.toString() == 'XMLHttpRequest') {
@@ -102,7 +100,7 @@ class EmptyRequest {
       apiResponse.setError(what3wordsError);
     }
 
-    var entity = EmptyResponse();
+    var entity = Response<String>();
     entity.setResponse(apiResponse);
     return entity;
   }
