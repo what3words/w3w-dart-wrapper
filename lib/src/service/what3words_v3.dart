@@ -1,11 +1,9 @@
 import 'package:what3words/src/request/autosuggest_options.dart';
 import 'package:what3words/src/request/autosuggest_selection_request.dart';
 import 'package:what3words/src/request/autosuggest_with_coordinates_request.dart';
-import 'package:what3words/src/response/autosuggest.dart';
 
 import '../request/autosuggest_request.dart';
 import '../request/available_languages_request.dart';
-import '../request/bounding_box.dart';
 import '../request/convert_to_3wa_request.dart';
 import '../request/convert_to_coordinates_request.dart';
 import '../request/coordinate.dart';
@@ -77,13 +75,16 @@ class What3WordsV3 {
   ///Returns a section of the 3m x 3m what3words grid for a bounding box. The bounding box is specified by lat,lng,lat,lng
   ///as south,west,north,east.
   ///
-  ///[boundingBox] [BoundingBox], for which the grid should be returned. The requested box must not exceed 4km
+  ///[southwest], SouthWest point of the bounding box for which the grid should be returned. The requested box must not exceed 4km
+  ///from corner to corner. Latitudes must be &gt;= -90 and &lt;= 90, but longitudes are allowed to wrap around 180. To specify a
+  ///bounding-box that crosses the anti-meridian, use longitude greater than 180.
+  ///[northeast], NorthEast point of the bounding box for which the grid should be returned. The requested box must not exceed 4km
   ///from corner to corner. Latitudes must be &gt;= -90 and &lt;= 90, but longitudes are allowed to wrap around 180. To specify a
   ///bounding-box that crosses the anti-meridian, use longitude greater than 180.
   ///
   ///returns a [GridSectionRequestBuilder] instance suitable for invoking a `grid-section` API request
-  GridSectionRequestBuilder gridSection(BoundingBox boundingBox) {
-    return GridSectionRequestBuilder(this, boundingBox);
+  GridSectionRequestBuilder gridSection(Coordinates southwest, Coordinates northeast) {
+    return GridSectionRequestBuilder(this, southwest, northeast);
   }
 
   ///AutoSuggest can take a slightly incorrect 3 word address, and suggest a list of valid 3 word addresses. It has powerful
@@ -92,7 +93,7 @@ class What3WordsV3 {
   ///
   ///[input] The full or partial 3 word address to obtain suggestions for. At minimum this must be the first two complete
   ///words plus at least one character from the third word.
-  ///[options] The autosuggest options, check available options here https://docs.what3words.com/api/v3/#autosuggest
+  ///[options] The autosuggest options and clippings, check available options here https://docs.what3words.com/api/v3/#autosuggest
   ///
   ///returns a [AutosuggestRequestBuilder] instance suitable for invoking a `autosuggest` API request
   AutosuggestRequestBuilder autosuggest(String input, {AutosuggestOptions options}) {

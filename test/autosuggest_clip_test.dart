@@ -36,9 +36,8 @@ void main() {
   test('testBoundingBox', () async {
     var sw = Coordinates(50, -5);
     var ne = Coordinates(53, 2);
-    var bbox = BoundingBox(sw, ne);
 
-    var options = AutosuggestOptions().setClipToBoundingBox(bbox);
+    var options = AutosuggestOptions().setClipToBoundingBox(sw, ne);
     var autosuggest = await api
         .autosuggest('index.home.ra', options: options)
         .execute();
@@ -59,8 +58,7 @@ void main() {
     var sw = Coordinates(50, -5);
     var ne = Coordinates(50, -5);
 
-    var bbox = BoundingBox(sw, ne);
-    var options = AutosuggestOptions().setClipToBoundingBox(bbox);
+    var options = AutosuggestOptions().setClipToBoundingBox(sw, ne);
     var autosuggest = await api
         .autosuggest('index.home.ra', options: options)
         .execute();
@@ -81,8 +79,7 @@ void main() {
     var sw = Coordinates(50, -5);
     var ne = Coordinates(53, 3544);
 
-    var bbox = BoundingBox(sw, ne);
-    var options = AutosuggestOptions().setClipToBoundingBox(bbox);
+    var options = AutosuggestOptions().setClipToBoundingBox(sw, ne);
     var autosuggest = await api
         .autosuggest('index.home.ra', options: options)
         .execute();
@@ -103,8 +100,7 @@ void main() {
     var sw = Coordinates(50, 2);
     var ne = Coordinates(53, 355);
 
-    var bbox = BoundingBox(sw, ne);
-    var options = AutosuggestOptions().setClipToBoundingBox(bbox);
+    var options = AutosuggestOptions().setClipToBoundingBox(sw, ne);
     var autosuggest = await api
         .autosuggest('index.home.ra', options: options)
         .execute();
@@ -125,8 +121,7 @@ void main() {
     var sw = Coordinates(53, -5);
     var ne = Coordinates(230, 2);
 
-    var bbox = BoundingBox(sw, ne);
-    var options = AutosuggestOptions().setClipToBoundingBox(bbox);
+    var options = AutosuggestOptions().setClipToBoundingBox(sw, ne);
     var autosuggest = await api
         .autosuggest('index.home.ra', options: options)
         .execute();

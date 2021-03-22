@@ -1,5 +1,4 @@
 import 'autosuggest_input_type.dart';
-import 'bounding_box.dart';
 import 'coordinate.dart';
 
 class AutosuggestOptions {
@@ -68,7 +67,7 @@ class AutosuggestOptions {
   ///
   ///Returns an [AutosuggestOptions] instance suitable to allow more query customisation
   AutosuggestOptions setClipToCircle(Coordinates centre, double radius) {
-    _clipToCircle = '${centre.lat},${centre.lng},${radius}';
+    _clipToCircle = '${centre.lat},${centre.lng},$radius';
     return this;
   }
 
@@ -90,14 +89,14 @@ class AutosuggestOptions {
     return this;
   }
 
-  ///Restrict autosuggest results to a [BoundingBox].
+  ///Restrict autosuggest results to a Bounding Box.
   ///
-  ///[boundingBox] [BoundingBox] to clip results too
-  ///
+  ///[southWest] Southwest coordinates of the bounding box
+  ///[northEast] Northeast coordinates of the bounding box
   ///Returns an [AutosuggestOptions] instance suitable to allow more query customisation
-  AutosuggestOptions setClipToBoundingBox(BoundingBox boundingBox) {
+  AutosuggestOptions setClipToBoundingBox(Coordinates southWest, Coordinates northEast) {
     _clipToBoundingBox =
-    '${boundingBox.sw.lat},${boundingBox.sw.lng},${boundingBox.ne.lat},${boundingBox.ne.lng}';
+    '${southWest.lat},${southWest.lng},${northEast.lat},${northEast.lng}';
     return this;
   }
 
