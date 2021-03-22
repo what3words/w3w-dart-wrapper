@@ -4,10 +4,9 @@ void main() async {
   // For all requests a what3words API key is needed
   var api = What3WordsV3('what3words-api-key');
 
-  // Create and execute a request to obtain a grid section within the provided bounding box
+  // Create and execute a request to obtain a grid section within the provided bounding box (sw and ne corners)
   var gridSection = await api
-      .gridSection(BoundingBox(
-          Coordinates(51.515900, -0.212517), Coordinates(51.527649, -0.191746)))
+      .gridSection(Coordinates(51.515900, -0.212517), Coordinates(51.527649, -0.191746))
       .execute();
 
   if (gridSection.isSuccessful()) {

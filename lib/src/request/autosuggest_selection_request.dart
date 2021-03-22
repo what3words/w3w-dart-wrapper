@@ -1,13 +1,15 @@
-import 'package:what3words/src/request/autosuggest_with_coordinates_request.dart';
+import 'package:what3words/src/request/request.dart';
+import 'package:what3words/src/response/response.dart';
 
-import 'autosuggest_options.dart';
+import '../../what3words.dart';
 import 'abstract_builder.dart';
-import '../response/autosuggest.dart';
-import '../service/what3words_v3.dart';
-import 'request.dart';
+import 'autosuggest_options.dart';
 
-class AutosuggestRequest extends Request<Autosuggest> {
-  final String input;
+class AutosuggestSelectionRequest extends EmptyRequest {
+  final String rawInput;
+  final String sourceApi;
+  final String selection;
+  final int rank;
   final String nResults;
   final String focus;
   final String nFocusResults;
@@ -19,8 +21,12 @@ class AutosuggestRequest extends Request<Autosuggest> {
   final String language;
   final String preferLand;
 
-  AutosuggestRequest._builder(AutosuggestRequestBuilder builder)
-      : input = builder._input,
+  AutosuggestSelectionRequest._builder(
+      AutosuggestSelectionRequestBuilder builder)
+      : rawInput = builder._rawInput,
+        sourceApi = builder._sourceApi,
+        selection = builder._words,
+        rank = builder._rank,
         nResults = builder._options.nResults,
         focus = builder._options.focus,
         nFocusResults = builder._options.nFocusResults,
@@ -33,9 +39,12 @@ class AutosuggestRequest extends Request<Autosuggest> {
         preferLand = builder._options.preferLand,
         super(builder.api);
 
-  Future<Autosuggest> execute() async {
-    return await super.call(api.what3words().autosuggest, Autosuggest(), [
-      input,
+  Future<Response<String>> execute() async {
+    return await super.call(api.what3words().autosuggestSelection, [
+      rawInput,
+      sourceApi,
+      selection,
+      rank,
       nResults,
       focus,
       nFocusResults,
@@ -50,18 +59,24 @@ class AutosuggestRequest extends Request<Autosuggest> {
   }
 }
 
-/// Builder for `autosuggest` API requests
-class AutosuggestRequestBuilder extends AbstractBuilder<Future<Autosuggest>> {
-  final String _input;
+/// Builder for `autosuggest-with-coordinates` API requests
+class AutosuggestSelectionRequestBuilder
+    extends AbstractBuilder<Future<Response<String>>> {
+  final String _rawInput;
+  final String _sourceApi;
+  final String _words;
+  final int _rank;
   final AutosuggestOptions _options;
 
-  AutosuggestRequestBuilder(What3WordsV3 api, this._input, this._options) : super(api);
+  AutosuggestSelectionRequestBuilder(What3WordsV3 api, this._rawInput,
+      this._sourceApi, this._words, this._rank, this._options)
+      : super(api);
 
   ///Execute the API call as represented by the values set within this [ConvertTo3WARequestBuilder]
   ///
   ///return an [Future<Autosuggest>] representing the response from the what3words API
   @override
-  Future<Autosuggest> execute() {
-    return AutosuggestRequest._builder(this).execute();
+  Future<Response<String>> execute() {
+    return AutosuggestSelectionRequest._builder(this).execute();
   }
 }

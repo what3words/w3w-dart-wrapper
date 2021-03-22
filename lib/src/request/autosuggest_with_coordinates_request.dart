@@ -1,12 +1,10 @@
-import 'package:what3words/src/request/autosuggest_with_coordinates_request.dart';
+import 'package:what3words/src/request/request.dart';
 
+import '../../what3words.dart';
 import 'autosuggest_options.dart';
 import 'abstract_builder.dart';
-import '../response/autosuggest.dart';
-import '../service/what3words_v3.dart';
-import 'request.dart';
 
-class AutosuggestRequest extends Request<Autosuggest> {
+class AutosuggestWithCoordinatesRequest extends Request<AutosuggestWithCoordinates> {
   final String input;
   final String nResults;
   final String focus;
@@ -19,7 +17,7 @@ class AutosuggestRequest extends Request<Autosuggest> {
   final String language;
   final String preferLand;
 
-  AutosuggestRequest._builder(AutosuggestRequestBuilder builder)
+  AutosuggestWithCoordinatesRequest._builder(AutosuggestWithCoordinatesRequestBuilder builder)
       : input = builder._input,
         nResults = builder._options.nResults,
         focus = builder._options.focus,
@@ -33,8 +31,8 @@ class AutosuggestRequest extends Request<Autosuggest> {
         preferLand = builder._options.preferLand,
         super(builder.api);
 
-  Future<Autosuggest> execute() async {
-    return await super.call(api.what3words().autosuggest, Autosuggest(), [
+  Future<AutosuggestWithCoordinates> execute() async {
+    return await super.call(api.what3words().autosuggestWithCoordinates, AutosuggestWithCoordinates(), [
       input,
       nResults,
       focus,
@@ -50,18 +48,18 @@ class AutosuggestRequest extends Request<Autosuggest> {
   }
 }
 
-/// Builder for `autosuggest` API requests
-class AutosuggestRequestBuilder extends AbstractBuilder<Future<Autosuggest>> {
+/// Builder for `autosuggest-with-coordinates` API requests
+class AutosuggestWithCoordinatesRequestBuilder extends AbstractBuilder<Future<AutosuggestWithCoordinates>> {
   final String _input;
   final AutosuggestOptions _options;
 
-  AutosuggestRequestBuilder(What3WordsV3 api, this._input, this._options) : super(api);
+  AutosuggestWithCoordinatesRequestBuilder(What3WordsV3 api, this._input, this._options) : super(api);
 
   ///Execute the API call as represented by the values set within this [ConvertTo3WARequestBuilder]
   ///
   ///return an [Future<Autosuggest>] representing the response from the what3words API
   @override
-  Future<Autosuggest> execute() {
-    return AutosuggestRequest._builder(this).execute();
+  Future<AutosuggestWithCoordinates> execute() {
+    return AutosuggestWithCoordinatesRequest._builder(this).execute();
   }
 }

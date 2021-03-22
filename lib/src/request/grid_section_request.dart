@@ -1,5 +1,6 @@
+import 'package:what3words/src/request/coordinate.dart';
+
 import 'request.dart';
-import 'bounding_box.dart';
 import 'abstract_builder.dart';
 import '../response/grid_section.dart';
 import '../service/what3words_v3.dart';
@@ -21,9 +22,9 @@ class GridSectionRequest extends Request<GridSection> {
 class GridSectionRequestBuilder extends AbstractBuilder<Future<GridSection>> {
   final String _boundingBox;
 
-  GridSectionRequestBuilder(What3WordsV3 api, BoundingBox boundingBox)
+  GridSectionRequestBuilder(What3WordsV3 api, Coordinates southwest, Coordinates northeast)
       : _boundingBox =
-            '${boundingBox.sw.lat},${boundingBox.sw.lng},${boundingBox.ne.lat},${boundingBox.ne.lng}',
+            '${southwest.lat},${southwest.lng},${northeast.lat},${northeast.lng}',
         super(api);
 
   ///Execute the API call as represented by the values set within this [GridSectionRequestBuilder]

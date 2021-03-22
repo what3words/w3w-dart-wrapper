@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:chopper/chopper.dart';
 
 class JsonToTypeConverter extends JsonConverter {
@@ -8,16 +9,23 @@ class JsonToTypeConverter extends JsonConverter {
 
   @override
   Response<BodyType> convertResponse<BodyType, InnerType>(Response response) {
-    return response.replace(
-      body: fromJsonData<BodyType, InnerType>(response.body, typeToJsonFactoryMap[InnerType]),
-    );
+    if (response.bodyString.isEmpty) {
+      return response;
+    } else {
+      return response.replace(
+        body: fromJsonData<BodyType, InnerType>(
+            response.body, typeToJsonFactoryMap[InnerType]),
+      );
+    }
   }
 
   T fromJsonData<T, InnerType>(String jsonData, Function jsonParser) {
     var jsonMap = json.decode(jsonData);
 
     if (jsonMap is List) {
-      return jsonMap.map((item) => jsonParser(item as Map<String, dynamic>) as InnerType).toList() as T;
+      return jsonMap
+          .map((item) => jsonParser(item as Map<String, dynamic>) as InnerType)
+          .toList() as T;
     }
 
     return jsonParser(jsonMap);

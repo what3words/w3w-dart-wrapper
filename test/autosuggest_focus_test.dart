@@ -1,15 +1,16 @@
-import 'package:test/test.dart';
-import 'package:what3words/what3words.dart';
 import 'dart:io' show Platform;
+
+import 'package:test/test.dart';
+import 'package:what3words/src/request/autosuggest_options.dart';
+import 'package:what3words/what3words.dart';
 
 void main() {
   var api = What3WordsV3(Platform.environment['W3W_API_KEY']);
 
   test('testValidFocus', () async {
-    var autosuggest = await api
-        .autosuggest('index.home.ra')
-        .focus(Coordinates(51.2, 0.2))
-        .execute();
+    var options = AutosuggestOptions().setFocus(Coordinates(51.2, 0.2));
+    var autosuggest =
+        await api.autosuggest('index.home.ra', options: options).execute();
     expect(autosuggest.isSuccessful(), true);
 
     var suggestions = autosuggest.suggestions;
@@ -24,10 +25,9 @@ void main() {
   });
 
   test('testFocusLatitudeTooBig', () async {
-    var autosuggest = await api
-        .autosuggest('index.home.ra')
-        .focus(Coordinates(151.2, 0.2))
-        .execute();
+    var options = AutosuggestOptions().setFocus(Coordinates(151.2, 0.2));
+    var autosuggest =
+        await api.autosuggest('index.home.ra', options: options).execute();
     expect(autosuggest.isSuccessful(), false);
 
     var error = autosuggest.getError();
@@ -35,10 +35,9 @@ void main() {
   });
 
   test('testFocusLatitudeTooSmall', () async {
-    var autosuggest = await api
-        .autosuggest('index.home.ra')
-        .focus(Coordinates(-151.2, 0.2))
-        .execute();
+    var options = AutosuggestOptions().setFocus(Coordinates(-151.2, 0.2));
+    var autosuggest =
+        await api.autosuggest('index.home.ra', options: options).execute();
     expect(autosuggest.isSuccessful(), false);
 
     var error = autosuggest.getError();
@@ -46,10 +45,10 @@ void main() {
   });
 
   test('testFocusBigLongitude', () async {
-    var autosuggest = await api
-        .autosuggest('index.home.ra')
-        .focus(Coordinates(51.2, 360.2))
-        .execute();
+    var options = AutosuggestOptions().setFocus(Coordinates(51.2, 360.2));
+
+    var autosuggest =
+        await api.autosuggest('index.home.ra', options: options).execute();
     expect(autosuggest.isSuccessful(), true);
 
     var suggestions = autosuggest.suggestions;
@@ -64,9 +63,10 @@ void main() {
   });
 
   test('testFocusSmallLongitude', () async {
+    var options = AutosuggestOptions().setFocus(Coordinates(51.2, -360));
+
     var autosuggest = await api
-        .autosuggest('index.home.ra')
-        .focus(Coordinates(51.2, -360))
+        .autosuggest('index.home.ra', options: options)
         .execute();
     expect(autosuggest.isSuccessful(), true);
 

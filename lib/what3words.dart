@@ -4,7 +4,6 @@ export 'src/request/autosuggest_input_type.dart';
 export 'src/request/autosuggest_request.dart' hide AutosuggestRequest;
 export 'src/request/available_languages_request.dart'
     hide AvailableLanguagesRequest;
-export 'src/request/bounding_box.dart';
 export 'src/request/convert_to_3wa_request.dart' hide ConvertTo3WARequest;
 export 'src/request/convert_to_coordinates_request.dart'
     hide ConvertToCoordinatesRequest;

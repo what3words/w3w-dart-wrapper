@@ -1,3 +1,8 @@
+## 3.0.4
+
+- Added autosuggest-with-coordinates.
+- Refactor bounding-box flow.
+
 ## 3.0.3
 
 - Check for network error in platform agnostic way.

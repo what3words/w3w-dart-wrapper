@@ -40,6 +40,38 @@ abstract class What3WordsV3Service extends ChopperService {
       @Query('language') String lang,
       @Query('prefer-land') String preferLand);
 
+  @Get(path: 'autosuggest-with-coordinates')
+  Future<Response<AutosuggestWithCoordinates>> autosuggestWithCoordinates(
+      @Query('input') String input,
+      @Query('n-results') String nResults,
+      @Query('focus') String focus,
+      @Query('n-focus-results') String nFocusResults,
+      @Query('clip-to-country') String clipToCountry,
+      @Query('clip-to-bounding-box') String clipToBoundingBox,
+      @Query('clip-to-circle') String clipToCircle,
+      @Query('clip-to-polygon') String clipToPolygon,
+      @Query('input-type') String inputType,
+      @Query('language') String lang,
+      @Query('prefer-land') String preferLand);
+
+  @Get(path: 'autosuggest-selection')
+  Future<Response<String>> autosuggestSelection(
+      @Query('raw-input') String rawInput,
+      @Query('source-api') String sourceApi,
+      @Query('selection') String selection,
+      @Query('rank') int rank,
+      @Query('n-results') String nResults,
+      @Query('focus') String focus,
+      @Query('n-focus-results') String nFocusResults,
+      @Query('clip-to-country') String clipToCountry,
+      @Query('clip-to-bounding-box') String clipToBoundingBox,
+      @Query('clip-to-circle') String clipToCircle,
+      @Query('clip-to-polygon') String clipToPolygon,
+      @Query('input-type') String inputType,
+      @Query('language') String lang,
+      @Query('prefer-land') String preferLand);
+
+
   static What3WordsV3Service create(
       String apiKey, String endpoint, Map<String, String> headers) {
     final client = ChopperClient(
@@ -56,7 +88,8 @@ abstract class What3WordsV3Service extends ChopperService {
           Location: (jsonData) => Location.fromJson(jsonData),
           Language: (jsonData) => Language.fromJson(jsonData),
           GridSection: (jsonData) => GridSection.fromJson(jsonData),
-          Autosuggest: (jsonData) => Autosuggest.fromJson(jsonData)
+          Autosuggest: (jsonData) => Autosuggest.fromJson(jsonData),
+          AutosuggestWithCoordinates: (jsonData) => AutosuggestWithCoordinates.fromJson(jsonData)
         }));
     return _$What3WordsV3Service(client);
   }
