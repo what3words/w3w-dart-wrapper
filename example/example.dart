@@ -8,21 +8,21 @@ void main() async {
   var coordinates = await api.convertToCoordinates('index.home.raft').execute();
 
   if (coordinates.isSuccessful()) {
-    print('Coordinates ${coordinates.toJson()}');
+    print('Coordinates ${coordinates.data()?.toJson()}');
   } else {
-    var error = coordinates.getError();
+    var error = coordinates.error();
 
     if (error == What3WordsError.BAD_WORDS) {
       // The three word address provided is invalid
-      print('BadWords: ${error.message}');
+      print('BadWords: ${error!.message}');
     } else if (error == What3WordsError.INTERNAL_SERVER_ERROR) {
       // Server Error
-      print('InternalServerError: ${error.message}');
+      print('InternalServerError: ${error!.message}');
     } else if (error == What3WordsError.NETWORK_ERROR) {
       // Network Error
-      print('NetworkError: ${error.message}');
+      print('NetworkError: ${error!.message}');
     } else {
-      print('${error.code} : ${error.message}');
+      print('${error!.code} : ${error.message}');
     }
   }
 }

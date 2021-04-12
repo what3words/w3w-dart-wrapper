@@ -3,21 +3,22 @@ import 'package:test/test.dart';
 import 'dart:io' show Platform;
 
 void main() {
-  var api = What3WordsV3(Platform.environment['W3W_API_KEY']);
+  var api = What3WordsV3(Platform.environment['W3W_API_KEY']!);
 
   test('invalid3waTest', () async {
     var location = await api.convertToCoordinates('filled').execute();
     expect(location.isSuccessful(), false);
 
-    var error = location.getError();
+    var error = location.error();
     expect(error, What3WordsError.BAD_WORDS);
   });
 
   test('valid3waTest', () async {
-    var location =
+    var locationRequest =
         await api.convertToCoordinates('filled.count.soap').execute();
 
-    expect(location.isSuccessful(), true);
+    expect(locationRequest.isSuccessful(), true);
+    var location = locationRequest.data()!;
 
     expect('filled.count.soap', location.words);
     expect('GB', location.country);

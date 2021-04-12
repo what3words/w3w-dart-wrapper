@@ -4,11 +4,11 @@ import '../response/api_response.dart';
 import '../service/what3words_v3.dart';
 import '../response/response.dart';
 
-class Request<T extends Response<T>> {
+class Request<T> {
   What3WordsV3 api;
   Request(this.api);
 
-  Future<T> call(Function f, T emptyEntity, List params) async {
+  Future<Response<T>> call(Function f, List params) async {
     APIResponse<T> apiResponse;
 
     try {
@@ -48,10 +48,7 @@ class Request<T extends Response<T>> {
       apiResponse.setError(what3wordsError);
     }
 
-    var entity = apiResponse.body();
-    entity ??= emptyEntity;
-    entity.setResponse(apiResponse);
-
+    var entity = Response<T>(apiResponse);
     return entity;
   }
 }
@@ -100,8 +97,7 @@ class EmptyRequest {
       apiResponse.setError(what3wordsError);
     }
 
-    var entity = Response<String>();
-    entity.setResponse(apiResponse);
+    var entity = Response<String>(apiResponse);
     return entity;
   }
 }

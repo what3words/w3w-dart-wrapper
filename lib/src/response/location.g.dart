@@ -9,14 +9,10 @@ part of 'location.dart';
 Location _$LocationFromJson(Map<String, dynamic> json) {
   return Location(
     country: json['country'] as String,
-    square: json['square'] == null
-        ? null
-        : Square.fromJson(json['square'] as Map<String, dynamic>),
+    square: Square.fromJson(json['square'] as Map<String, dynamic>),
     nearestPlace: json['nearestPlace'] as String,
-    coordinates: json['coordinates'] == null
-        ? null
-        : CoordinatesResponse.fromJson(
-            json['coordinates'] as Map<String, dynamic>),
+    coordinates: CoordinatesResponse.fromJson(
+        json['coordinates'] as Map<String, dynamic>),
     words: json['words'] as String,
     language: json['language'] as String,
     map: json['map'] as String,
@@ -25,9 +21,9 @@ Location _$LocationFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$LocationToJson(Location instance) => <String, dynamic>{
       'country': instance.country,
-      'square': instance.square?.toJson(),
+      'square': instance.square.toJson(),
       'nearestPlace': instance.nearestPlace,
-      'coordinates': instance.coordinates?.toJson(),
+      'coordinates': instance.coordinates.toJson(),
       'words': instance.words,
       'language': instance.language,
       'map': instance.map,
@@ -35,18 +31,14 @@ Map<String, dynamic> _$LocationToJson(Location instance) => <String, dynamic>{
 
 Square _$SquareFromJson(Map<String, dynamic> json) {
   return Square(
-    southwest: json['southwest'] == null
-        ? null
-        : CoordinatesResponse.fromJson(
-            json['southwest'] as Map<String, dynamic>),
-    northeast: json['northeast'] == null
-        ? null
-        : CoordinatesResponse.fromJson(
-            json['northeast'] as Map<String, dynamic>),
+    southwest:
+        CoordinatesResponse.fromJson(json['southwest'] as Map<String, dynamic>),
+    northeast:
+        CoordinatesResponse.fromJson(json['northeast'] as Map<String, dynamic>),
   );
 }
 
 Map<String, dynamic> _$SquareToJson(Square instance) => <String, dynamic>{
-      'southwest': instance.southwest?.toJson(),
-      'northeast': instance.northeast?.toJson(),
+      'southwest': instance.southwest.toJson(),
+      'northeast': instance.northeast.toJson(),
     };

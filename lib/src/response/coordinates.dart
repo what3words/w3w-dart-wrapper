@@ -7,7 +7,7 @@ class CoordinatesResponse {
   double lng;
   double lat;
 
-  CoordinatesResponse({this.lng, this.lat});
+  CoordinatesResponse({required this.lng, required this.lat});
 
   factory CoordinatesResponse.fromJson(Map<String, dynamic> json) =>
       _$CoordinatesResponseFromJson(json);

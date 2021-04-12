@@ -8,7 +8,7 @@ part of 'what3words_service.dart';
 
 // ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations
 class _$What3WordsV3Service extends What3WordsV3Service {
-  _$What3WordsV3Service([ChopperClient client]) {
+  _$What3WordsV3Service([ChopperClient? client]) {
     if (client == null) return;
     this.client = client;
   }
@@ -32,7 +32,8 @@ class _$What3WordsV3Service extends What3WordsV3Service {
   }
 
   @override
-  Future<Response<Location>> convertTo3wa(String coordinates, String language) {
+  Future<Response<Location>> convertTo3wa(
+      String coordinates, String? language) {
     final $url = 'convert-to-3wa';
     final $params = <String, dynamic>{
       'coordinates': coordinates,
@@ -53,16 +54,16 @@ class _$What3WordsV3Service extends What3WordsV3Service {
   @override
   Future<Response<Autosuggest>> autosuggest(
       String input,
-      String nResults,
-      String focus,
-      String nFocusResults,
-      String clipToCountry,
-      String clipToBoundingBox,
-      String clipToCircle,
-      String clipToPolygon,
-      String inputType,
-      String lang,
-      String preferLand) {
+      String? nResults,
+      String? focus,
+      String? nFocusResults,
+      String? clipToCountry,
+      String? clipToBoundingBox,
+      String? clipToCircle,
+      String? clipToPolygon,
+      String? inputType,
+      String? lang,
+      String? preferLand) {
     final $url = 'autosuggest';
     final $params = <String, dynamic>{
       'input': input,
@@ -84,16 +85,16 @@ class _$What3WordsV3Service extends What3WordsV3Service {
   @override
   Future<Response<AutosuggestWithCoordinates>> autosuggestWithCoordinates(
       String input,
-      String nResults,
-      String focus,
-      String nFocusResults,
-      String clipToCountry,
-      String clipToBoundingBox,
-      String clipToCircle,
-      String clipToPolygon,
-      String inputType,
-      String lang,
-      String preferLand) {
+      String? nResults,
+      String? focus,
+      String? nFocusResults,
+      String? clipToCountry,
+      String? clipToBoundingBox,
+      String? clipToCircle,
+      String? clipToPolygon,
+      String? inputType,
+      String? lang,
+      String? preferLand) {
     final $url = 'autosuggest-with-coordinates';
     final $params = <String, dynamic>{
       'input': input,
@@ -119,16 +120,16 @@ class _$What3WordsV3Service extends What3WordsV3Service {
       String sourceApi,
       String selection,
       int rank,
-      String nResults,
-      String focus,
-      String nFocusResults,
-      String clipToCountry,
-      String clipToBoundingBox,
-      String clipToCircle,
-      String clipToPolygon,
-      String inputType,
-      String lang,
-      String preferLand) {
+      String? nResults,
+      String? focus,
+      String? nFocusResults,
+      String? clipToCountry,
+      String? clipToBoundingBox,
+      String? clipToCircle,
+      String? clipToPolygon,
+      String? inputType,
+      String? lang,
+      String? preferLand) {
     final $url = 'autosuggest-selection';
     final $params = <String, dynamic>{
       'raw-input': rawInput,

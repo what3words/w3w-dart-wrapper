@@ -8,15 +8,14 @@ part of 'language.dart';
 
 Language _$LanguageFromJson(Map<String, dynamic> json) {
   return Language(
-    languages: (json['languages'] as List)
-        ?.map((e) =>
-            e == null ? null : Languages.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
+    languages: (json['languages'] as List<dynamic>)
+        .map((e) => Languages.fromJson(e as Map<String, dynamic>))
+        .toList(),
   );
 }
 
 Map<String, dynamic> _$LanguageToJson(Language instance) => <String, dynamic>{
-      'languages': instance.languages?.map((e) => e?.toJson())?.toList(),
+      'languages': instance.languages.map((e) => e.toJson()).toList(),
     };
 
 Languages _$LanguagesFromJson(Map<String, dynamic> json) {

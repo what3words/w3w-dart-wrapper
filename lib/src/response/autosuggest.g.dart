@@ -8,16 +8,15 @@ part of 'autosuggest.dart';
 
 Autosuggest _$AutosuggestFromJson(Map<String, dynamic> json) {
   return Autosuggest(
-    suggestions: (json['suggestions'] as List)
-        ?.map((e) =>
-            e == null ? null : Suggestion.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
+    suggestions: (json['suggestions'] as List<dynamic>)
+        .map((e) => Suggestion.fromJson(e as Map<String, dynamic>))
+        .toList(),
   );
 }
 
 Map<String, dynamic> _$AutosuggestToJson(Autosuggest instance) =>
     <String, dynamic>{
-      'suggestions': instance.suggestions?.map((e) => e?.toJson())?.toList(),
+      'suggestions': instance.suggestions.map((e) => e.toJson()).toList(),
     };
 
 Suggestion _$SuggestionFromJson(Map<String, dynamic> json) {
@@ -25,7 +24,7 @@ Suggestion _$SuggestionFromJson(Map<String, dynamic> json) {
     country: json['country'] as String,
     nearestPlace: json['nearestPlace'] as String,
     words: json['words'] as String,
-    distanceToFocusKm: json['distanceToFocusKm'] as int,
+    distanceToFocusKm: json['distanceToFocusKm'] as int?,
     rank: json['rank'] as int,
     language: json['language'] as String,
   );
@@ -44,18 +43,17 @@ Map<String, dynamic> _$SuggestionToJson(Suggestion instance) =>
 AutosuggestWithCoordinates _$AutosuggestWithCoordinatesFromJson(
     Map<String, dynamic> json) {
   return AutosuggestWithCoordinates(
-    suggestions: (json['suggestions'] as List)
-        ?.map((e) => e == null
-            ? null
-            : SuggestionWithCoordinates.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
+    suggestions: (json['suggestions'] as List<dynamic>)
+        .map((e) =>
+            SuggestionWithCoordinates.fromJson(e as Map<String, dynamic>))
+        .toList(),
   );
 }
 
 Map<String, dynamic> _$AutosuggestWithCoordinatesToJson(
         AutosuggestWithCoordinates instance) =>
     <String, dynamic>{
-      'suggestions': instance.suggestions?.map((e) => e?.toJson())?.toList(),
+      'suggestions': instance.suggestions.map((e) => e.toJson()).toList(),
     };
 
 SuggestionWithCoordinates _$SuggestionWithCoordinatesFromJson(
@@ -64,11 +62,9 @@ SuggestionWithCoordinates _$SuggestionWithCoordinatesFromJson(
     country: json['country'] as String,
     nearestPlace: json['nearestPlace'] as String,
     words: json['words'] as String,
-    coordinates: json['coordinates'] == null
-        ? null
-        : CoordinatesResponse.fromJson(
-            json['coordinates'] as Map<String, dynamic>),
-    distanceToFocusKm: json['distanceToFocusKm'] as int,
+    coordinates: CoordinatesResponse.fromJson(
+        json['coordinates'] as Map<String, dynamic>),
+    distanceToFocusKm: json['distanceToFocusKm'] as int?,
     rank: json['rank'] as int,
     language: json['language'] as String,
   );
@@ -80,7 +76,7 @@ Map<String, dynamic> _$SuggestionWithCoordinatesToJson(
       'country': instance.country,
       'nearestPlace': instance.nearestPlace,
       'words': instance.words,
-      'coordinates': instance.coordinates?.toJson(),
+      'coordinates': instance.coordinates.toJson(),
       'distanceToFocusKm': instance.distanceToFocusKm,
       'rank': instance.rank,
       'language': instance.language,

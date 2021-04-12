@@ -10,7 +10,7 @@ class JsonToTypeConverter extends JsonConverter {
   @override
   Response<BodyType> convertResponse<BodyType, InnerType>(Response response) {
     if (response.bodyString.isEmpty) {
-      return response;
+      return response as Response<BodyType>;
     } else {
       return response.replace(
         body: fromJsonData<BodyType, InnerType>(
@@ -19,15 +19,15 @@ class JsonToTypeConverter extends JsonConverter {
     }
   }
 
-  T fromJsonData<T, InnerType>(String jsonData, Function jsonParser) {
+  T? fromJsonData<T, InnerType>(String jsonData, Function? jsonParser) {
     var jsonMap = json.decode(jsonData);
 
     if (jsonMap is List) {
       return jsonMap
-          .map((item) => jsonParser(item as Map<String, dynamic>) as InnerType)
+          .map((item) => jsonParser!(item as Map<String, dynamic>) as InnerType?)
           .toList() as T;
     }
 
-    return jsonParser(jsonMap);
+    return jsonParser!(jsonMap);
   }
 }

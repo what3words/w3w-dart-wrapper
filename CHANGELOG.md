@@ -1,3 +1,9 @@
+## 3.1.0-nullsafety.1
+
+- Added null-safety support
+- Breaking changes:
+- Refactor Response object, now Response contains the data instead of data containing the response (use data() which can be null if there's an error, check isSuccessful() before)
+
 ## 3.0.4
 
 - Added autosuggest-with-coordinates.

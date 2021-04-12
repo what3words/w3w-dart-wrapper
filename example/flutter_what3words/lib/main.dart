@@ -39,19 +39,19 @@ class LocationFormState extends State<LocationForm> {
     var twaInput = TextFormField(
       controller: twaController,
       decoration: InputDecoration(
-          hintText: "e.g. lock.spout.radar"
+          hintText: 'e.g. lock.spout.radar'
       ),
     );
 
     var convertToCoordsButton = ElevatedButton(
-      child: Text("Convert To Coordinates"),
+      child: Text('Convert To Coordinates'),
       onPressed: () async {
         var location = await api.convertToCoordinates(twaController.text).execute();
         setState(() {
           if (location.isSuccessful()) {
-            twaHolder = '${location.coordinates.lat}, ${location.coordinates.lng}';
+            twaHolder = '${location.data()!.coordinates.lat}, ${location.data()!.coordinates.lng}';
           } else {
-            twaHolder = '${location.getError().code}: ${location.getError().message}';
+            twaHolder = '${location.error()!.code}: ${location.error()!.message}';
           }
         });
       },

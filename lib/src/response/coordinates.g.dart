@@ -8,8 +8,8 @@ part of 'coordinates.dart';
 
 CoordinatesResponse _$CoordinatesResponseFromJson(Map<String, dynamic> json) {
   return CoordinatesResponse(
-    lng: (json['lng'] as num)?.toDouble(),
-    lat: (json['lat'] as num)?.toDouble(),
+    lng: (json['lng'] as num).toDouble(),
+    lat: (json['lat'] as num).toDouble(),
   );
 }
 

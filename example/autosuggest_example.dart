@@ -11,21 +11,21 @@ void main() async {
       await api.autosuggest('filled.count.soap', options: AutosuggestOptions().setNResults(3)).execute();
 
   if (autosuggest.isSuccessful()) {
-    print('Autosuggest: ${autosuggest.toJson()}');
+    print('Autosuggest: ${autosuggest.data()?.toJson()}');
   } else {
-    var error = autosuggest.getError();
+    var error = autosuggest.error();
 
     if (error == What3WordsError.BAD_N_RESULTS) {
       // The coordinates provided were bad
-      print('BadNResults: ${error.message}');
+      print('BadNResults: ${error!.message}');
     } else if (error == What3WordsError.INTERNAL_SERVER_ERROR) {
       // Server Error
-      print('InternalServerError: ${error.message}');
+      print('InternalServerError: ${error!.message}');
     } else if (error == What3WordsError.NETWORK_ERROR) {
       // Network Error
-      print('NetworkError: ${error.message}');
+      print('NetworkError: ${error!.message}');
     } else {
-      print('${error.code} : ${error.message}');
+      print('${error!.code} : ${error.message}');
     }
   }
 
@@ -54,30 +54,30 @@ void main() async {
   //     .clipToCountry(['fr', 'de']).execute();
 
   if (autosuggest.isSuccessful()) {
-    print('Autosuggest: ${autosuggest.toJson()}');
+    print('Autosuggest: ${autosuggest.data()?.toJson()}');
   } else {
-    var error = autosuggest.getError();
+    var error = autosuggest.error();
 
     if (error == What3WordsError.BAD_CLIP_TO_CIRCLE) {
       // The circle clip provided is not valid
-      print('BadClipToCircle: ${error.message}');
+      print('BadClipToCircle: ${error!.message}');
     } else if (error == What3WordsError.BAD_CLIP_TO_BOUNDING_BOX) {
       // The bounding box clip provided is not valid
-      print('BadClipToBoundingBox: ${error.message}');
+      print('BadClipToBoundingBox: ${error!.message}');
     } else if (error == What3WordsError.BAD_CLIP_TO_COUNTRY) {
       // The country list provided is not valid
-      print('BadClipToCountry: ${error.message}');
+      print('BadClipToCountry: ${error!.message}');
     } else if (error == What3WordsError.BAD_CLIP_TO_POLYGON) {
       // The polygon clip provided is not valid
-      print('BadClipToPolygon: ${error.message}');
+      print('BadClipToPolygon: ${error!.message}');
     } else if (error == What3WordsError.INTERNAL_SERVER_ERROR) {
       // Server Error
-      print('InternalServerError: ${error.message}');
+      print('InternalServerError: ${error!.message}');
     } else if (error == What3WordsError.NETWORK_ERROR) {
       // Network Error
-      print('NetworkError: ${error.message}');
+      print('NetworkError: ${error!.message}');
     } else {
-      print('${error.code} : ${error.message}');
+      print('${error!.code} : ${error.message}');
     }
   }
 
@@ -89,27 +89,27 @@ void main() async {
       options: options)
       .execute();
   if (autosuggest.isSuccessful()) {
-    print('Autosuggest: ${autosuggest.toJson()}');
+    print('Autosuggest: ${autosuggest.data()?.toJson()}');
   } else {
-    var error = autosuggest.getError();
+    var error = autosuggest.error();
 
     if (error == What3WordsError.BAD_INPUT) {
       // The input is not valid, given the input type provided
-      print('BadInput: ${error.message}');
+      print('BadInput: ${error!.message}');
     } else if (error == What3WordsError.BAD_INPUT_TYPE) {
       // The input type is not valid
-      print('BadInputType: ${error.message}');
+      print('BadInputType: ${error!.message}');
     } else if (error == What3WordsError.BAD_LANGUAGE) {
       // The provided language is not valid
-      print('BadLanguage: ${error.message}');
+      print('BadLanguage: ${error!.message}');
     } else if (error == What3WordsError.INTERNAL_SERVER_ERROR) {
       // Server Error
-      print('InternalServerError: ${error.message}');
+      print('InternalServerError: ${error!.message}');
     } else if (error == What3WordsError.NETWORK_ERROR) {
       // Network Error
-      print('NetworkError: ${error.message}');
+      print('NetworkError: ${error!.message}');
     } else {
-      print('${error.code} : ${error.message}');
+      print('${error!.code} : ${error.message}');
     }
   }
 }

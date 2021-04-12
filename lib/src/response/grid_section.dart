@@ -1,15 +1,14 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:what3words/src/response/response.dart';
 
 import 'coordinates.dart';
 part 'grid_section.g.dart';
 
 /// A section of the what3words grid
 @JsonSerializable(explicitToJson: true)
-class GridSection extends Response<GridSection> {
+class GridSection {
   List<Line> lines;
 
-  GridSection({this.lines});
+  GridSection({required this.lines});
 
   factory GridSection.fromJson(Map<String, dynamic> json) =>
       _$GridSectionFromJson(json);
@@ -23,7 +22,7 @@ class Line {
   CoordinatesResponse start;
   CoordinatesResponse end;
 
-  Line({this.start, this.end});
+  Line({required this.start, required this.end});
 
   factory Line.fromJson(Map<String, dynamic> json) => _$LineFromJson(json);
 

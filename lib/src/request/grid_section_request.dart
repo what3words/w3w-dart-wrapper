@@ -1,4 +1,5 @@
 import 'package:what3words/src/request/coordinate.dart';
+import 'package:what3words/src/response/response.dart';
 
 import 'request.dart';
 import 'abstract_builder.dart';
@@ -12,14 +13,14 @@ class GridSectionRequest extends Request<GridSection> {
       : boundingBox = builder._boundingBox,
         super(builder.api);
 
-  Future<GridSection> execute() async {
+  Future<Response<GridSection>> execute() async {
     return await super
-        .call(api.what3words().gridSection, GridSection(), [boundingBox]);
+        .call(api.what3words().gridSection, [boundingBox]);
   }
 }
 
 /// Builder for `grid-section` API requests
-class GridSectionRequestBuilder extends AbstractBuilder<Future<GridSection>> {
+class GridSectionRequestBuilder extends AbstractBuilder<Future<Response<GridSection>>> {
   final String _boundingBox;
 
   GridSectionRequestBuilder(What3WordsV3 api, Coordinates southwest, Coordinates northeast)
@@ -31,7 +32,7 @@ class GridSectionRequestBuilder extends AbstractBuilder<Future<GridSection>> {
   ///
   ///return an [Future<GridSection>] representing the response from the what3words API
   @override
-  Future<GridSection> execute() {
+  Future<Response<GridSection>> execute() {
     return GridSectionRequest._builder(this).execute();
   }
 }

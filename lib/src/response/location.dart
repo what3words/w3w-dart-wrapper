@@ -1,12 +1,11 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import 'coordinates.dart';
-import 'response.dart';
 part 'location.g.dart';
 
 /// Encapsulates a what3words location
 @JsonSerializable(explicitToJson: true)
-class Location extends Response<Location> {
+class Location {
   String country;
   Square square;
   String nearestPlace;
@@ -16,13 +15,13 @@ class Location extends Response<Location> {
   String map;
 
   Location(
-      {this.country,
-      this.square,
-      this.nearestPlace,
-      this.coordinates,
-      this.words,
-      this.language,
-      this.map});
+      {required this.country,
+      required this.square,
+      required this.nearestPlace,
+      required this.coordinates,
+      required this.words,
+      required this.language,
+      required this.map});
 
   factory Location.fromJson(Map<String, dynamic> json) =>
       _$LocationFromJson(json);
@@ -36,7 +35,7 @@ class Square {
   CoordinatesResponse southwest;
   CoordinatesResponse northeast;
 
-  Square({this.southwest, this.northeast});
+  Square({required this.southwest, required this.northeast});
 
   factory Square.fromJson(Map<String, dynamic> json) => _$SquareFromJson(json);
 

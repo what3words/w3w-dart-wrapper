@@ -1,15 +1,14 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:what3words/src/response/coordinates.dart';
 
-import 'response.dart';
 part 'autosuggest.g.dart';
 
 ///Encapulates AutoSuggest suggestions
 @JsonSerializable(explicitToJson: true)
-class Autosuggest extends Response<Autosuggest> {
+class Autosuggest {
   List<Suggestion> suggestions;
 
-  Autosuggest({this.suggestions});
+  Autosuggest({required this.suggestions});
 
   factory Autosuggest.fromJson(Map<String, dynamic> json) =>
       _$AutosuggestFromJson(json);
@@ -22,17 +21,17 @@ class Suggestion {
   String country;
   String nearestPlace;
   String words;
-  int distanceToFocusKm;
+  int? distanceToFocusKm;
   int rank;
   String language;
 
   Suggestion(
-      {this.country,
-      this.nearestPlace,
-      this.words,
+      {required this.country,
+      required this.nearestPlace,
+      required this.words,
       this.distanceToFocusKm,
-      this.rank,
-      this.language});
+      required this.rank,
+      required this.language});
 
   factory Suggestion.fromJson(Map<String, dynamic> json) =>
       _$SuggestionFromJson(json);
@@ -42,10 +41,10 @@ class Suggestion {
 
 ///Encapulates AutoSuggest suggestions
 @JsonSerializable(explicitToJson: true)
-class AutosuggestWithCoordinates extends Response<AutosuggestWithCoordinates> {
+class AutosuggestWithCoordinates {
   List<SuggestionWithCoordinates> suggestions;
 
-  AutosuggestWithCoordinates({this.suggestions});
+  AutosuggestWithCoordinates({required this.suggestions});
 
   factory AutosuggestWithCoordinates.fromJson(Map<String, dynamic> json) =>
       _$AutosuggestWithCoordinatesFromJson(json);
@@ -59,18 +58,18 @@ class SuggestionWithCoordinates {
   String nearestPlace;
   String words;
   CoordinatesResponse coordinates;
-  int distanceToFocusKm;
+  int? distanceToFocusKm;
   int rank;
   String language;
 
   SuggestionWithCoordinates(
-      {this.country,
-        this.nearestPlace,
-        this.words,
-        this.coordinates,
-        this.distanceToFocusKm,
-        this.rank,
-        this.language});
+      {required this.country,
+      required this.nearestPlace,
+      required this.words,
+      required this.coordinates,
+      this.distanceToFocusKm,
+      required this.rank,
+      required this.language});
 
   factory SuggestionWithCoordinates.fromJson(Map<String, dynamic> json) =>
       _$SuggestionWithCoordinatesFromJson(json);

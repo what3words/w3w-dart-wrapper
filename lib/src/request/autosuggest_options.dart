@@ -2,27 +2,27 @@ import 'autosuggest_input_type.dart';
 import 'coordinate.dart';
 
 class AutosuggestOptions {
-  String _nResults;
-  String _focus;
-  String _nFocusResults;
-  String _clipToCountry;
-  String _clipToBoundingBox;
-  String _clipToCircle;
-  String _clipToPolygon;
-  String _inputType;
-  String _language;
-  String _preferLand;
+  String? _nResults;
+  String? _focus;
+  String? _nFocusResults;
+  String? _clipToCountry;
+  String? _clipToBoundingBox;
+  String? _clipToCircle;
+  String? _clipToPolygon;
+  String? _inputType;
+  String? _language;
+  String? _preferLand;
 
-  String get nResults => _nResults;
-  String get focus => _focus;
-  String get nFocusResults => _nFocusResults;
-  String get clipToCountry => _clipToCountry;
-  String get clipToBoundingBox => _clipToBoundingBox;
-  String get clipToCircle => _clipToCircle;
-  String get clipToPolygon => _clipToPolygon;
-  String get inputType => _inputType;
-  String get language => _language;
-  String get preferLand => _preferLand;
+  String? get nResults => _nResults;
+  String? get focus => _focus;
+  String? get nFocusResults => _nFocusResults;
+  String? get clipToCountry => _clipToCountry;
+  String? get clipToBoundingBox => _clipToBoundingBox;
+  String? get clipToCircle => _clipToCircle;
+  String? get clipToPolygon => _clipToPolygon;
+  String? get inputType => _inputType;
+  String? get language => _language;
+  String? get preferLand => _preferLand;
 
   ///Set the number of AutoSuggest results to return. A maximum of 100 results can be specified, if a number greater than this is requested,
   ///this will be truncated to the maximum. The default is 3

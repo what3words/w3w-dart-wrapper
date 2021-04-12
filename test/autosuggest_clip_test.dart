@@ -4,7 +4,7 @@ import 'package:what3words/what3words.dart';
 import 'dart:io' show Platform;
 
 void main() {
-  var api = What3WordsV3(Platform.environment['W3W_API_KEY']);
+  var api = What3WordsV3(Platform.environment['W3W_API_KEY']!);
 
   test('testSimpleCircleClip', () async {
     var options = AutosuggestOptions().setClipToCircle(Coordinates(-90.000000, 360.0), 100);
@@ -21,7 +21,7 @@ void main() {
         .execute();
     expect(autosuggest.isSuccessful(), false);
 
-    var error = autosuggest.getError();
+    var error = autosuggest.error();
     expect(error, What3WordsError.BAD_CLIP_TO_CIRCLE);
   });
 
@@ -43,7 +43,7 @@ void main() {
         .execute();
     expect(autosuggest.isSuccessful(), true);
 
-    var suggestions = autosuggest.suggestions;
+    var suggestions = autosuggest.data()!.suggestions;
 
     var found = false;
     for (var s in suggestions) {
@@ -64,7 +64,7 @@ void main() {
         .execute();
     expect(autosuggest.isSuccessful(), true);
 
-    var suggestions = autosuggest.suggestions;
+    var suggestions = autosuggest.data()!.suggestions;
 
     var found = false;
     for (var s in suggestions) {
@@ -85,7 +85,7 @@ void main() {
         .execute();
     expect(autosuggest.isSuccessful(), true);
 
-    var suggestions = autosuggest.suggestions;
+    var suggestions = autosuggest.data()!.suggestions;
 
     var found = false;
     for (var s in suggestions) {
@@ -106,7 +106,7 @@ void main() {
         .execute();
     expect(autosuggest.isSuccessful(), true);
 
-    var suggestions = autosuggest.suggestions;
+    var suggestions = autosuggest.data()!.suggestions;
 
     var found = false;
     for (var s in suggestions) {
@@ -125,10 +125,9 @@ void main() {
     var autosuggest = await api
         .autosuggest('index.home.ra', options: options)
         .execute();
-    expect(autosuggest.isSuccessful(), false);
 
-    var error = autosuggest.getError();
-    expect(error, What3WordsError.BAD_CLIP_TO_BOUNDING_BOX);
+    expect(autosuggest.isSuccessful(), false);
+    expect(autosuggest.error(), What3WordsError.BAD_CLIP_TO_BOUNDING_BOX);
   });
 
   test('clipToCountryThatDoesNotExist', () async {
@@ -139,7 +138,7 @@ void main() {
 
     expect(autosuggest.isSuccessful(), true);
 
-    var suggestions = autosuggest.suggestions;
+    var suggestions = autosuggest.data()!.suggestions;
 
     var found = false;
     for (var s in suggestions) {
@@ -158,7 +157,7 @@ void main() {
 
     expect(autosuggest.isSuccessful(), false);
 
-    var error = autosuggest.getError();
+    var error = autosuggest.error();
     expect(error, What3WordsError.BAD_CLIP_TO_COUNTRY);
   });
 }
