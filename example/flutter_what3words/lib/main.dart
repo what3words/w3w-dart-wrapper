@@ -44,7 +44,6 @@ class LocationFormState extends State<LocationForm> {
     );
 
     var convertToCoordsButton = ElevatedButton(
-      child: Text('Convert To Coordinates'),
       onPressed: () async {
         var location = await api.convertToCoordinates(twaController.text).execute();
         setState(() {
@@ -55,6 +54,7 @@ class LocationFormState extends State<LocationForm> {
           }
         });
       },
+      child: Text('Convert To Coordinates'),
     );
 
     return Form(

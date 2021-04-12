@@ -12,7 +12,7 @@ class JsonToTypeConverter extends JsonConverter {
     if (response.bodyString.isEmpty) {
       return response as Response<BodyType>;
     } else {
-      return response.replace(
+      return response.copyWith(
         body: fromJsonData<BodyType, InnerType>(
             response.body, typeToJsonFactoryMap[InnerType]),
       );

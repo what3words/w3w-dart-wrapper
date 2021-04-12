@@ -10,7 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  what3words: ^3.1.0-nullsafety.1
+  what3words: ^3.1.0-nullsafety.3
 
 dev_dependencies:
   flutter_test:

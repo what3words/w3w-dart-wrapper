@@ -1,4 +1,3 @@
-import 'package:what3words/src/response/api_response.dart';
 import 'package:what3words/src/response/response.dart';
 
 import 'autosuggest_options.dart';

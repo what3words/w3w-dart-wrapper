@@ -1,7 +1,7 @@
 name: what3words
 description: >-
   A Dart library to use the what3words v3 API. This library can either be used in native Dart or Flutter applications
-version: 3.1.0-nullsafety.1
+version: 3.1.0-nullsafety.3
 homepage: https://github.com/what3words/w3w-dart-wrapper
 
 environment:
@@ -9,8 +9,6 @@ environment:
 
 dependencies:
  chopper: ^4.0.0-nullsafety.0
- json_serializable: ^4.1.0
- json_annotation: ^4.0.1
  os_detect: ^2.0.0-nullsafety.0
 
 dev_dependencies:
