@@ -1,4 +1,4 @@
-## 3.1.0-nullsafety.3
+## 3.1.0
 
 - Added null-safety support
 - Breaking changes:
