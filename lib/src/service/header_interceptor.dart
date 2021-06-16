@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:chopper/chopper.dart';
-import 'package:os_detect/os_detect.dart' as Platform;
+import 'package:os_detect/os_detect.dart' as _platform;
 
 class HeaderInterceptor implements RequestInterceptor {
   // This version must be updated in tandem with the pubspec version.
@@ -10,7 +10,7 @@ class HeaderInterceptor implements RequestInterceptor {
   static final String w3w_wrapper = 'X-W3W-Wrapper';
 
   final String _apiKey;
-  final Map<String, String> _headers;
+  final Map<String, String>? _headers;
 
   final String _userAgent;
 
@@ -20,7 +20,7 @@ class HeaderInterceptor implements RequestInterceptor {
         _userAgent = getUserAgent();
 
   static String getUserAgent() {
-    return 'what3words-Dart/${APP_VERSION} (${Platform.operatingSystem}; ${Platform.operatingSystemVersion})';
+    return 'what3words-Dart/$APP_VERSION (${_platform.operatingSystem}; ${_platform.operatingSystemVersion})';
   }
 
   @override
@@ -30,9 +30,7 @@ class HeaderInterceptor implements RequestInterceptor {
       w3w_wrapper: _userAgent
     };
 
-    if (_headers != null) {
-      _headers.forEach((k, v) => headers[k] = v);
-    }
+    _headers?.forEach((k, v) => headers[k] = v);
 
     var newRequest = request.copyWith(headers: headers);
     return newRequest;

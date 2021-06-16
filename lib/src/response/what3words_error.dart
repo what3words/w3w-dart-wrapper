@@ -31,10 +31,10 @@ class What3WordsError {
   static What3WordsError NETWORK_ERROR = What3WordsError('NetworkError');
 
   String code;
-  String message;
+  String? message;
   What3WordsError(this.code);
 
-  static What3WordsError get(String code) {
+  static What3WordsError get(String? code) {
     switch (code) {
       case 'BadCoordinates':
         return BAD_COORDINATES;

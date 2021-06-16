@@ -5,7 +5,7 @@ import 'package:what3words/src/request/autosuggest_options.dart';
 import 'package:what3words/what3words.dart';
 
 void main() {
-  var api = What3WordsV3(Platform.environment['W3W_API_KEY']);
+  var api = What3WordsV3(Platform.environment['W3W_API_KEY']!);
 
   test('testValidFocus', () async {
     var options = AutosuggestOptions().setFocus(Coordinates(51.2, 0.2));
@@ -13,7 +13,7 @@ void main() {
         await api.autosuggest('index.home.ra', options: options).execute();
     expect(autosuggest.isSuccessful(), true);
 
-    var suggestions = autosuggest.suggestions;
+    var suggestions = autosuggest.data()!.suggestions;
 
     var found = false;
     for (var s in suggestions) {
@@ -30,7 +30,7 @@ void main() {
         await api.autosuggest('index.home.ra', options: options).execute();
     expect(autosuggest.isSuccessful(), false);
 
-    var error = autosuggest.getError();
+    var error = autosuggest.error();
     expect(error, What3WordsError.BAD_FOCUS);
   });
 
@@ -40,7 +40,7 @@ void main() {
         await api.autosuggest('index.home.ra', options: options).execute();
     expect(autosuggest.isSuccessful(), false);
 
-    var error = autosuggest.getError();
+    var error = autosuggest.error();
     expect(error, What3WordsError.BAD_FOCUS);
   });
 
@@ -51,7 +51,7 @@ void main() {
         await api.autosuggest('index.home.ra', options: options).execute();
     expect(autosuggest.isSuccessful(), true);
 
-    var suggestions = autosuggest.suggestions;
+    var suggestions = autosuggest.data()!.suggestions;
 
     var found = false;
     for (var s in suggestions) {
@@ -70,7 +70,7 @@ void main() {
         .execute();
     expect(autosuggest.isSuccessful(), true);
 
-    var suggestions = autosuggest.suggestions;
+    var suggestions = autosuggest.data()!.suggestions;
 
     var found = false;
     for (var s in suggestions) {

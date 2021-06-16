@@ -4,7 +4,7 @@ import 'package:what3words/what3words.dart';
 import 'dart:io' show Platform;
 
 void main() {
-  var api = What3WordsV3(Platform.environment['W3W_API_KEY']);
+  var api = What3WordsV3(Platform.environment['W3W_API_KEY']!);
 
   test('testPolygonClip', () async {
     // Polygon must have at least 4 entries
@@ -18,7 +18,7 @@ void main() {
         .execute();
     expect(autosuggest.isSuccessful(), true);
 
-    var suggestions = autosuggest.suggestions;
+    var suggestions = autosuggest.data()!.suggestions;
 
     var found = false;
     for (var s in suggestions) {
@@ -43,7 +43,7 @@ void main() {
 
     expect(autosuggest.isSuccessful(), false);
 
-    var error = autosuggest.getError();
+    var error = autosuggest.error();
     expect(error, What3WordsError.BAD_CLIP_TO_POLYGON);
   });
 
@@ -59,7 +59,7 @@ void main() {
         .execute();
     expect(autosuggest.isSuccessful(), true);
 
-    var suggestions = autosuggest.suggestions;
+    var suggestions = autosuggest.data()!.suggestions;
 
     var found = false;
     for (var s in suggestions) {

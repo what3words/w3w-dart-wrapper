@@ -9,9 +9,9 @@ class AvailableLanguagesRequest extends Request<Language> {
   AvailableLanguagesRequest._builder(AvailableLanguagesRequestBuilder builder)
       : super(builder.api);
 
-  Future<Language> execute() async {
+  Future<Response<Language>> execute() async {
     return await super
-        .call(api.what3words().availableLanguages, Language(), []);
+        .call(api.what3words().availableLanguages, []);
   }
 }
 
@@ -24,7 +24,7 @@ class AvailableLanguagesRequestBuilder
   ///
   ///return an [Future<Language>] representing the response from the what3words API
   @override
-  Future<Language> execute() {
+  Future<Response<Language>> execute() {
     return AvailableLanguagesRequest._builder(this).execute();
   }
 }

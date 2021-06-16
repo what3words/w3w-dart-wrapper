@@ -10,24 +10,24 @@ void main() async {
       .execute();
 
   if (gridSection.isSuccessful()) {
-    print(gridSection.toJson());
+    print(gridSection.data()?.toJson());
   } else {
-    var error = gridSection.getError();
+    var error = gridSection.error();
 
     if (error == What3WordsError.BAD_BOUNDING_BOX) {
       // The BoundingBox is invalid
-      print('BadBoundingBox: ${error.message}');
+      print('BadBoundingBox: ${error!.message}');
     } else if (error == What3WordsError.BAD_BOUNDING_BOX_TOO_BIG) {
       // The BoundingBox is too big
-      print('BadBoundingBoxTooBig: ${error.message}');
+      print('BadBoundingBoxTooBig: ${error!.message}');
     } else if (error == What3WordsError.INTERNAL_SERVER_ERROR) {
       // Server Error
-      print('InternalServerError: ${error.message}');
+      print('InternalServerError: ${error!.message}');
     } else if (error == What3WordsError.NETWORK_ERROR) {
       // Network Error
-      print('NetworkError: ${error.message}');
+      print('NetworkError: ${error!.message}');
     } else {
-      print('${error.code} : ${error.message}');
+      print('${error!.code} : ${error.message}');
     }
   }
 }

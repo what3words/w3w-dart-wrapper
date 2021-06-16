@@ -12,7 +12,7 @@ The artifact is available through [pub.dev](https://pub.dev/packages/what3words)
 
 ```
 dependencies:
- what3words: 3.0.4
+ what3words: 3.1.0
 ``` 
 
 ## Documentation
@@ -64,9 +64,9 @@ var api = What3WordsV3('what3words-api-key');
 var coordinates = await api.convertToCoordinates('index.home.raft').execute();
 
 if (coordinates.isSuccessful()) {
-  print('Coordinates ${coordinates.toJson()}');
+  print('Coordinates ${coordinates.data()!.toJson()}');
 } else {
-  var error = coordinates.getError();
+  var error = coordinates.error();
 
   if (error == What3WordsError.BAD_WORDS) {
     // The three word address provided is invalid

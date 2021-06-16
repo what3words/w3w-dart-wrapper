@@ -1,3 +1,5 @@
+import 'package:what3words/src/response/response.dart';
+
 import '../response/location.dart';
 import 'abstract_builder.dart';
 import '../service/what3words_v3.dart';
@@ -11,15 +13,15 @@ class ConvertToCoordinatesRequest extends Request<Location> {
       : words = builder._words,
         super(builder.api);
 
-  Future<Location> execute() async {
+  Future<Response<Location>> execute() async {
     return await super
-        .call(api.what3words().convertToCoordinates, Location(), [words]);
+        .call(api.what3words().convertToCoordinates, [words]);
   }
 }
 
 /// Builder for `convert-to-coordinates` API requests
 class ConvertToCoordinatesRequestBuilder
-    extends AbstractBuilder<Future<Location>> {
+    extends AbstractBuilder<Future<Response<Location>>> {
   final String _words;
 
   ConvertToCoordinatesRequestBuilder(What3WordsV3 api, this._words)
@@ -29,7 +31,7 @@ class ConvertToCoordinatesRequestBuilder
   ///
   ///return an [Future<Location>] representing the response from the what3words API
   @override
-  Future<Location> execute() {
+  Future<Response<Location>> execute() {
     return ConvertToCoordinatesRequest._builder(this).execute();
   }
 }

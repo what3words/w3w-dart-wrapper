@@ -1,3 +1,5 @@
+import 'package:what3words/src/response/response.dart';
+
 import '../response/location.dart';
 import 'coordinate.dart';
 import 'abstract_builder.dart';
@@ -6,23 +8,23 @@ import 'request.dart';
 
 class ConvertTo3WARequest extends Request<Location> {
   final String coordinates;
-  final String language;
+  final String? language;
 
   ConvertTo3WARequest._builder(ConvertTo3WARequestBuilder builder)
       : coordinates = builder._coordinates,
         language = builder._language,
         super(builder.api);
 
-  Future<Location> execute() async {
+  Future<Response<Location>> execute() async {
     return await super.call(
-        api.what3words().convertTo3wa, Location(), [coordinates, language]);
+        api.what3words().convertTo3wa, [coordinates, language]);
   }
 }
 
 /// Builder for `convert-to-3wa` API requests
-class ConvertTo3WARequestBuilder extends AbstractBuilder<Future<Location>> {
+class ConvertTo3WARequestBuilder extends AbstractBuilder<Future<Response<Location>>> {
   final String _coordinates;
-  String _language;
+  String? _language;
 
   ConvertTo3WARequestBuilder(What3WordsV3 api, Coordinates coordinates)
       : _coordinates = '${coordinates.lat}, ${coordinates.lng}',
@@ -42,7 +44,7 @@ class ConvertTo3WARequestBuilder extends AbstractBuilder<Future<Location>> {
   ///
   ///return an [Future<Location>] representing the response from the what3words API
   @override
-  Future<Location> execute() {
+  Future<Response<Location>> execute() {
     return ConvertTo3WARequest._builder(this).execute();
   }
 }

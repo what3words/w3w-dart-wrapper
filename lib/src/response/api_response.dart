@@ -6,18 +6,18 @@ import 'what3words_error.dart';
 /// Wrapper class for and API response. Can hold the successful result
 /// or the error details
 class APIResponse<T> {
-  Response<T> response;
-  APIError apiError;
-  What3WordsError error;
+  Response<T>? response;
+  APIError? apiError;
+  What3WordsError? error;
 
   APIResponse(this.response);
 
   bool isSuccessful() {
-    return response != null && response.isSuccessful;
+    return response != null && response!.isSuccessful;
   }
 
-  T body() {
-    return response == null ? null : response.body;
+  T? body() {
+    return response == null ? null : response!.body;
   }
 
   void setError(What3WordsError error) {
@@ -28,7 +28,7 @@ class APIResponse<T> {
     this.apiError = apiError;
   }
 
-  APIError getAPIError() {
+  APIError? getAPIError() {
     return apiError;
   }
 }

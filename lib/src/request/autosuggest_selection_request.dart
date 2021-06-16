@@ -8,18 +8,18 @@ import 'autosuggest_options.dart';
 class AutosuggestSelectionRequest extends EmptyRequest {
   final String rawInput;
   final String sourceApi;
-  final String selection;
-  final int rank;
-  final String nResults;
-  final String focus;
-  final String nFocusResults;
-  final String clipToCountry;
-  final String clipToBoundingBox;
-  final String clipToCircle;
-  final String clipToPolygon;
-  final String inputType;
-  final String language;
-  final String preferLand;
+  final String? selection;
+  final int? rank;
+  final String? nResults;
+  final String? focus;
+  final String? nFocusResults;
+  final String? clipToCountry;
+  final String? clipToBoundingBox;
+  final String? clipToCircle;
+  final String? clipToPolygon;
+  final String? inputType;
+  final String? language;
+  final String? preferLand;
 
   AutosuggestSelectionRequest._builder(
       AutosuggestSelectionRequestBuilder builder)
@@ -27,16 +27,16 @@ class AutosuggestSelectionRequest extends EmptyRequest {
         sourceApi = builder._sourceApi,
         selection = builder._words,
         rank = builder._rank,
-        nResults = builder._options.nResults,
-        focus = builder._options.focus,
-        nFocusResults = builder._options.nFocusResults,
-        clipToCountry = builder._options.clipToCountry,
-        clipToBoundingBox = builder._options.clipToBoundingBox,
-        clipToCircle = builder._options.clipToCircle,
-        clipToPolygon = builder._options.clipToPolygon,
-        inputType = builder._options.inputType,
-        language = builder._options.language,
-        preferLand = builder._options.preferLand,
+        nResults = builder._options?.nResults,
+        focus = builder._options?.focus,
+        nFocusResults = builder._options?.nFocusResults,
+        clipToCountry = builder._options?.clipToCountry,
+        clipToBoundingBox = builder._options?.clipToBoundingBox,
+        clipToCircle = builder._options?.clipToCircle,
+        clipToPolygon = builder._options?.clipToPolygon,
+        inputType = builder._options?.inputType,
+        language = builder._options?.language,
+        preferLand = builder._options?.preferLand,
         super(builder.api);
 
   Future<Response<String>> execute() async {
@@ -64,9 +64,9 @@ class AutosuggestSelectionRequestBuilder
     extends AbstractBuilder<Future<Response<String>>> {
   final String _rawInput;
   final String _sourceApi;
-  final String _words;
-  final int _rank;
-  final AutosuggestOptions _options;
+  final String? _words;
+  final int? _rank;
+  final AutosuggestOptions? _options;
 
   AutosuggestSelectionRequestBuilder(What3WordsV3 api, this._rawInput,
       this._sourceApi, this._words, this._rank, this._options)

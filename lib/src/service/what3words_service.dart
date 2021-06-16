@@ -20,7 +20,7 @@ abstract class What3WordsV3Service extends ChopperService {
   @Get(path: 'convert-to-3wa')
   Future<Response<Location>> convertTo3wa(
       @Query('coordinates') String coordinates,
-      @Query('language') String language);
+      @Query('language') String? language);
 
   @Get(path: 'grid-section')
   Future<Response<GridSection>> gridSection(
@@ -29,16 +29,16 @@ abstract class What3WordsV3Service extends ChopperService {
   @Get(path: 'autosuggest')
   Future<Response<Autosuggest>> autosuggest(
       @Query('input') String input,
-      @Query('n-results') String nResults,
-      @Query('focus') String focus,
-      @Query('n-focus-results') String nFocusResults,
-      @Query('clip-to-country') String clipToCountry,
-      @Query('clip-to-bounding-box') String clipToBoundingBox,
-      @Query('clip-to-circle') String clipToCircle,
-      @Query('clip-to-polygon') String clipToPolygon,
-      @Query('input-type') String inputType,
-      @Query('language') String lang,
-      @Query('prefer-land') String preferLand);
+      @Query('n-results') String? nResults,
+      @Query('focus') String? focus,
+      @Query('n-focus-results') String? nFocusResults,
+      @Query('clip-to-country') String? clipToCountry,
+      @Query('clip-to-bounding-box') String? clipToBoundingBox,
+      @Query('clip-to-circle') String? clipToCircle,
+      @Query('clip-to-polygon') String? clipToPolygon,
+      @Query('input-type') String? inputType,
+      @Query('language') String? lang,
+      @Query('prefer-land') String? preferLand);
 
   @Get(path: 'autosuggest-with-coordinates')
   Future<Response<AutosuggestWithCoordinates>> autosuggestWithCoordinates(
@@ -73,7 +73,7 @@ abstract class What3WordsV3Service extends ChopperService {
 
 
   static What3WordsV3Service create(
-      String apiKey, String endpoint, Map<String, String> headers) {
+      String? apiKey, String endpoint, Map<String, String>? headers) {
     final client = ChopperClient(
         baseUrl: endpoint,
         interceptors: [

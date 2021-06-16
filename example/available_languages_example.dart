@@ -8,18 +8,18 @@ void main() async {
   var languages = await api.availableLanguages().execute();
 
   if (languages.isSuccessful()) {
-    print('Languages: ${languages.toJson()}');
+    print('Languages: ${languages.data()?.toJson()}');
   } else {
-    var error = languages.getError();
+    var error = languages.error();
 
     if (error == What3WordsError.INTERNAL_SERVER_ERROR) {
       // Server Error
-      print('InternalServerError: ${error.message}');
+      print('InternalServerError: ${error!.message}');
     } else if (error == What3WordsError.NETWORK_ERROR) {
       // Network Error
-      print('NetworkError: ${error.message}');
+      print('NetworkError: ${error!.message}');
     } else {
-      print('${error.code} : ${error.message}');
+      print('${error!.code} : ${error.message}');
     }
   }
 }

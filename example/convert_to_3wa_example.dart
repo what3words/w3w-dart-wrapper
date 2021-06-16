@@ -11,24 +11,24 @@ void main() async {
       .execute();
 
   if (words.isSuccessful()) {
-    print('Words: ${words.toJson()}');
+    print('Words: ${words.data()?.toJson()}');
   } else {
-    var error = words.getError();
+    var error = words.error();
 
     if (error == What3WordsError.BAD_COORDINATES) {
       // The coordinates provided were bad
-      print('BadCoordinates: ${error.message}');
+      print('BadCoordinates: ${error!.message}');
     } else if (error == What3WordsError.BAD_LANGUAGE) {
       // The language provided was bad
-      print('BadLanguage: ${error.message}');
+      print('BadLanguage: ${error!.message}');
     } else if (error == What3WordsError.INTERNAL_SERVER_ERROR) {
       // Server Error
-      print('InternalServerError: ${error.message}');
+      print('InternalServerError: ${error!.message}');
     } else if (error == What3WordsError.NETWORK_ERROR) {
       // Network Error
-      print('NetworkError: ${error.message}');
+      print('NetworkError: ${error!.message}');
     } else {
-      print('${error.code} : ${error.message}');
+      print('${error!.code} : ${error.message}');
     }
   }
 }

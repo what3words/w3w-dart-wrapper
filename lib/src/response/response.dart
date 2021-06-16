@@ -1,25 +1,23 @@
-import 'package:json_annotation/json_annotation.dart';
-
 import 'api_response.dart';
 import 'what3words_error.dart';
 
-part 'response.g.dart';
-
 /// Wrapper for a successful what3words response
-@JsonSerializable()
 class Response<T> {
-  @JsonKey(ignore: true)
-  APIResponse<T> response;
+  late APIResponse<T> _response;
 
-  void setResponse(APIResponse<T> response) {
-    this.response = response;
+  Response(APIResponse<T> response) {
+    _response = response;
   }
 
-  What3WordsError getError() {
-    return response.error;
+  T? data() {
+    return _response.body();
+  }
+
+  What3WordsError? error() {
+    return _response.error;
   }
 
   bool isSuccessful() {
-    return response.isSuccessful();
+    return _response.isSuccessful();
   }
 }
