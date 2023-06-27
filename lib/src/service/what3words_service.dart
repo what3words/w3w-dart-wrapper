@@ -71,11 +71,13 @@ abstract class What3WordsV3Service extends ChopperService {
       @Query('language') String lang,
       @Query('prefer-land') String preferLand);
 
-
   static What3WordsV3Service create(
       String? apiKey, String endpoint, Map<String, String>? headers) {
     final client = ChopperClient(
-        baseUrl: endpoint,
+        baseUrl: Uri(
+            scheme: "https",
+            host: endpoint.split("/")[0],
+            path: endpoint.split("/")[1]),
         interceptors: [
           HeaderInterceptor(apiKey, headers),
           HttpLoggingInterceptor()
@@ -89,7 +91,8 @@ abstract class What3WordsV3Service extends ChopperService {
           Language: (jsonData) => Language.fromJson(jsonData),
           GridSection: (jsonData) => GridSection.fromJson(jsonData),
           Autosuggest: (jsonData) => Autosuggest.fromJson(jsonData),
-          AutosuggestWithCoordinates: (jsonData) => AutosuggestWithCoordinates.fromJson(jsonData)
+          AutosuggestWithCoordinates: (jsonData) =>
+              AutosuggestWithCoordinates.fromJson(jsonData)
         }));
     return _$What3WordsV3Service(client);
   }

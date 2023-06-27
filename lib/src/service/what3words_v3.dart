@@ -12,7 +12,7 @@ import 'what3words_service.dart';
 
 ///Instances of the What3WordsV3 class provide access to Version 3 of the what3words API.
 class What3WordsV3 {
-  final _defaultEndpoint = 'https://api.what3words.com/v3';
+  final _defaultEndpoint = "api.what3words.com/v3";
   late What3WordsV3Service _service;
 
   ///Get a new API manager instance.
@@ -83,7 +83,8 @@ class What3WordsV3 {
   ///bounding-box that crosses the anti-meridian, use longitude greater than 180.
   ///
   ///returns a [GridSectionRequestBuilder] instance suitable for invoking a `grid-section` API request
-  GridSectionRequestBuilder gridSection(Coordinates southwest, Coordinates northeast) {
+  GridSectionRequestBuilder gridSection(
+      Coordinates southwest, Coordinates northeast) {
     return GridSectionRequestBuilder(this, southwest, northeast);
   }
 
@@ -96,7 +97,8 @@ class What3WordsV3 {
   ///[options] The autosuggest options and clippings, check available options here https://docs.what3words.com/api/v3/#autosuggest
   ///
   ///returns a [AutosuggestRequestBuilder] instance suitable for invoking a `autosuggest` API request
-  AutosuggestRequestBuilder autosuggest(String input, {AutosuggestOptions? options}) {
+  AutosuggestRequestBuilder autosuggest(String input,
+      {AutosuggestOptions? options}) {
     return AutosuggestRequestBuilder(this, input, options);
   }
 
@@ -109,7 +111,9 @@ class What3WordsV3 {
   ///[options] The autosuggest options, check available options here https://docs.what3words.com/api/v3/#autosuggest
   ///
   ///returns a [AutosuggestWithCoordinatesRequestBuilder] instance suitable for invoking a `autosuggest` API request
-  AutosuggestWithCoordinatesRequestBuilder autosuggestWithCoordinates(String input, {AutosuggestOptions? options}) {
+  AutosuggestWithCoordinatesRequestBuilder autosuggestWithCoordinates(
+      String input,
+      {AutosuggestOptions? options}) {
     return AutosuggestWithCoordinatesRequestBuilder(this, input, options);
   }
 
@@ -122,8 +126,11 @@ class What3WordsV3 {
   ///[rank] The rank of the selected suggestion.
   ///[options] The autosuggest options used on the autosuggest or autosuggest-with-coordinates call.
   ///returns a [AutosuggestWithCoordinatesRequestBuilder] instance suitable for invoking a `autosuggest` API request
-  AutosuggestSelectionRequestBuilder autosuggestSelection(String rawInput, String sourceApi, String words, int rank, {AutosuggestOptions? options}) {
-    return AutosuggestSelectionRequestBuilder(this, rawInput, sourceApi, words, rank, options);
+  AutosuggestSelectionRequestBuilder autosuggestSelection(
+      String rawInput, String sourceApi, String words, int rank,
+      {AutosuggestOptions? options}) {
+    return AutosuggestSelectionRequestBuilder(
+        this, rawInput, sourceApi, words, rank, options);
   }
 
   What3WordsV3Service what3words() {
