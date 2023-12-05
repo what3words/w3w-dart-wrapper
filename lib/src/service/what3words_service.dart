@@ -72,12 +72,9 @@ abstract class What3WordsV3Service extends ChopperService {
       @Query('prefer-land') String preferLand);
 
   static What3WordsV3Service create(
-      String? apiKey, String endpoint, Map<String, String>? headers) {
+      String? apiKey, Uri endpoint, Map<String, String>? headers) {
     final client = ChopperClient(
-        baseUrl: Uri(
-            scheme: "https",
-            host: endpoint.split("/")[0],
-            path: endpoint.split("/")[1]),
+        baseUrl: endpoint,
         interceptors: [
           HeaderInterceptor(apiKey, headers),
           HttpLoggingInterceptor()

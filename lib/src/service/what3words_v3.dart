@@ -12,7 +12,9 @@ import 'what3words_service.dart';
 
 ///Instances of the What3WordsV3 class provide access to Version 3 of the what3words API.
 class What3WordsV3 {
-  final _defaultEndpoint = "api.what3words.com/v3";
+  final _defaultEndpoint =
+      Uri(scheme: "https", path: "/v3", host: "api.what3words.com");
+
   late What3WordsV3Service _service;
 
   ///Get a new API manager instance.
@@ -26,7 +28,7 @@ class What3WordsV3 {
   ///
   ///[apiKey] Your what3words API key obtained from https://what3words.com/select-plan
   ///[endpoint] override the default public API endpoint
-  What3WordsV3.withEndpoint(String apiKey, String endpoint) {
+  What3WordsV3.withEndpoint(String apiKey, Uri endpoint) {
     _setupHttpClient(apiKey, endpoint, null);
   }
 
@@ -35,12 +37,12 @@ class What3WordsV3 {
   ///[endpoint] override the default public API endpoint
   ///[headers] add any custom HTTP headers to send in each request
   What3WordsV3.withHeaders(
-      String apiKey, String endpoint, Map<String, String> headers) {
+      String apiKey, Uri endpoint, Map<String, String> headers) {
     _setupHttpClient(apiKey, endpoint, headers);
   }
 
   void _setupHttpClient(
-      String apiKey, String endpoint, Map<String, String>? headers) {
+      String apiKey, Uri endpoint, Map<String, String>? headers) {
     _service = What3WordsV3Service.create(apiKey, endpoint, headers);
   }
 

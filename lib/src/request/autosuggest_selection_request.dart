@@ -1,9 +1,7 @@
 import 'package:what3words/src/request/request.dart';
-import 'package:what3words/src/response/response.dart';
 
 import '../../what3words.dart';
 import 'abstract_builder.dart';
-import 'autosuggest_options.dart';
 
 class AutosuggestSelectionRequest extends EmptyRequest {
   final String rawInput;

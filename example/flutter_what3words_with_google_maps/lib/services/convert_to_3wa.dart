@@ -76,11 +76,11 @@ class _ConvertTo3WAPageState extends State<ConvertTo3WAPage> {
           margin: const EdgeInsets.all(10.0),
           color: Colors.white,
           height: 50,
-          child: Row(
+          child: const Row(
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const <Widget>[
+            children: <Widget>[
               Expanded(
                 child: Text(
                   'Hello, Click on the map to get \n your 3 word address!',
