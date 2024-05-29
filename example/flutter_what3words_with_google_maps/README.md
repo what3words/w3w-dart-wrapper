@@ -51,7 +51,8 @@ flutter run
 ```
 
 # Google Map API
-The application is currently using the a Low Quota Google Map API key. This is a temporary key and is not valid for production usage. It can be replaced by following these instructions to
+
+The application is currently using a Low Quota Google Map API key. This is a temporary key and is not valid for production usage. It can be replaced by following these instructions to
 [get an api key](https://developers.google.com/maps/documentation/javascript/get-api-key).
 
 ```sh
@@ -59,5 +60,5 @@ GOOGLE_MAPS_API_KEY=AIzaSyDcwGyRxRbcNGWOFQVT87A1mkxEOfm8t0w
 ```
 
 # Issues
-Currently the grid is not plotted correctly on the google maps we are planning to improve it. 
 
+Currently the grid is not plotted correctly on the google maps we are planning to improve it.

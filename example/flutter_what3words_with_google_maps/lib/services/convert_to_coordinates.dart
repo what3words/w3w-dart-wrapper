@@ -100,8 +100,7 @@ class _ConvertToCoordinatesPageState extends State<ConvertToCoordinatesPage> {
   }
 
   final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
-    onPrimary: Colors.blue,
-    primary: Colors.blue[100],
+    foregroundColor: Colors.blue, backgroundColor: Colors.blue[100],
     minimumSize: const Size(58, 58),
     padding: const EdgeInsets.symmetric(horizontal: 10),
   );

@@ -18,14 +18,14 @@ class _$What3WordsV3Service extends What3WordsV3Service {
 
   @override
   Future<Response<Language>> availableLanguages() {
-    final $url = 'available-languages';
+    final $url = Uri(path: 'available-languages');
     final $request = Request('GET', $url, client.baseUrl);
     return client.send<Language, Language>($request);
   }
 
   @override
   Future<Response<Location>> convertToCoordinates(String words) {
-    final $url = 'convert-to-coordinates';
+    final $url = Uri(path: 'convert-to-coordinates');
     final $params = <String, dynamic>{'words': words};
     final $request = Request('GET', $url, client.baseUrl, parameters: $params);
     return client.send<Location, Location>($request);
@@ -34,7 +34,7 @@ class _$What3WordsV3Service extends What3WordsV3Service {
   @override
   Future<Response<Location>> convertTo3wa(
       String coordinates, String? language) {
-    final $url = 'convert-to-3wa';
+    final $url = Uri(path: 'convert-to-3wa');
     final $params = <String, dynamic>{
       'coordinates': coordinates,
       'language': language
@@ -45,7 +45,7 @@ class _$What3WordsV3Service extends What3WordsV3Service {
 
   @override
   Future<Response<GridSection>> gridSection(String boundingBox) {
-    final $url = 'grid-section';
+    final $url = Uri(path: 'grid-section');
     final $params = <String, dynamic>{'bounding-box': boundingBox};
     final $request = Request('GET', $url, client.baseUrl, parameters: $params);
     return client.send<GridSection, GridSection>($request);
@@ -64,7 +64,7 @@ class _$What3WordsV3Service extends What3WordsV3Service {
       String? inputType,
       String? lang,
       String? preferLand) {
-    final $url = 'autosuggest';
+    final $url = Uri(path: 'autosuggest');
     final $params = <String, dynamic>{
       'input': input,
       'n-results': nResults,
@@ -95,7 +95,7 @@ class _$What3WordsV3Service extends What3WordsV3Service {
       String? inputType,
       String? lang,
       String? preferLand) {
-    final $url = 'autosuggest-with-coordinates';
+    final $url = Uri(path: 'autosuggest-with-coordinates');
     final $params = <String, dynamic>{
       'input': input,
       'n-results': nResults,
@@ -130,7 +130,7 @@ class _$What3WordsV3Service extends What3WordsV3Service {
       String? inputType,
       String? lang,
       String? preferLand) {
-    final $url = 'autosuggest-selection';
+    final $url = Uri(path: 'autosuggest-selection');
     final $params = <String, dynamic>{
       'raw-input': rawInput,
       'source-api': sourceApi,

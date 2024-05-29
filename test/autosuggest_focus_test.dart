@@ -1,7 +1,6 @@
 import 'dart:io' show Platform;
 
 import 'package:test/test.dart';
-import 'package:what3words/src/request/autosuggest_options.dart';
 import 'package:what3words/what3words.dart';
 
 void main() {
@@ -65,9 +64,8 @@ void main() {
   test('testFocusSmallLongitude', () async {
     var options = AutosuggestOptions().setFocus(Coordinates(51.2, -360));
 
-    var autosuggest = await api
-        .autosuggest('index.home.ra', options: options)
-        .execute();
+    var autosuggest =
+        await api.autosuggest('index.home.ra', options: options).execute();
     expect(autosuggest.isSuccessful(), true);
 
     var suggestions = autosuggest.data()!.suggestions;

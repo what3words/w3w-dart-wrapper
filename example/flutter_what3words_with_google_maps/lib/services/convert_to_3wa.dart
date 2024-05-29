@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -67,7 +68,6 @@ class _ConvertTo3WAPageState extends State<ConvertTo3WAPage> {
                   backgroundColor: Colors.teal[200],
                   onPressed: () {
                     _changeMapType();
-                    print('Changing the Map Type');
                   }),
             ],
           ),
@@ -76,11 +76,11 @@ class _ConvertTo3WAPageState extends State<ConvertTo3WAPage> {
           margin: const EdgeInsets.all(10.0),
           color: Colors.white,
           height: 50,
-          child: Row(
+          child: const Row(
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const <Widget>[
+            children: <Widget>[
               Expanded(
                 child: Text(
                   'Hello, Click on the map to get \n your 3 word address!',
@@ -113,12 +113,10 @@ class _ConvertTo3WAPageState extends State<ConvertTo3WAPage> {
   }
 
   Future<void> _handleTap(LatLng tappedPoint) async {
-    print(tappedPoint);
     final words = await api
         .convertTo3wa(Coordinates(tappedPoint.latitude, tappedPoint.longitude))
         .language('en')
         .execute();
-    print(words.data()!.words);
     LatLng mLatLng = tappedPoint;
     String mTitle = '///${words.data()!.words}';
     String mDescription =
@@ -129,7 +127,7 @@ class _ConvertTo3WAPageState extends State<ConvertTo3WAPage> {
       if (words.isSuccessful()) {
         addMarker(mLatLng, mTitle, mDescription);
       } else {
-        print(words.error());
+        log(words.error().toString());
       }
     });
   }
