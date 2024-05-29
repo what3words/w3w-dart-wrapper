@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -67,7 +68,6 @@ class _ConvertTo3WAPageState extends State<ConvertTo3WAPage> {
                   backgroundColor: Colors.teal[200],
                   onPressed: () {
                     _changeMapType();
-                    print('Changing the Map Type');
                   }),
             ],
           ),
@@ -113,12 +113,10 @@ class _ConvertTo3WAPageState extends State<ConvertTo3WAPage> {
   }
 
   Future<void> _handleTap(LatLng tappedPoint) async {
-    print(tappedPoint);
     final words = await api
         .convertTo3wa(Coordinates(tappedPoint.latitude, tappedPoint.longitude))
         .language('en')
         .execute();
-    print(words.data()!.words);
     LatLng mLatLng = tappedPoint;
     String mTitle = '///${words.data()!.words}';
     String mDescription =
@@ -129,7 +127,7 @@ class _ConvertTo3WAPageState extends State<ConvertTo3WAPage> {
       if (words.isSuccessful()) {
         addMarker(mLatLng, mTitle, mDescription);
       } else {
-        print(words.error());
+        log(words.error().toString());
       }
     });
   }
