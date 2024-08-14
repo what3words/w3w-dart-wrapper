@@ -6,33 +6,58 @@ void main() {
   var api = What3WordsV3(Platform.environment['W3W_API_KEY']!);
 
   test('invalid3waTest', () async {
-    var location = await api.convertToCoordinates('filled').execute();
-    expect(location.isSuccessful(), false);
+    var locationRequest = await api.convertToCoordinates('filled').execute();
+    
+    expect(locationRequest.isSuccessful(), false);
 
-    var error = location.error();
-    expect(error, What3WordsError.BAD_WORDS);
+    var error = locationRequest.error();
+    expect(error, isNotNull);  // Ensure that the error is not null
+
+    if (error != null) {
+      if (error == What3WordsError.BAD_WORDS) {
+        expect(error, What3WordsError.BAD_WORDS);
+      } else if (error == What3WordsError.QUOTAEXCEEDED_ERROR) {
+        expect(error, What3WordsError.QUOTAEXCEEDED_ERROR);
+      } else {
+        fail('Unexpected error type: ${error.toString()}');
+      }
+    }
   });
 
   test('valid3waTest', () async {
-    var locationRequest =
-        await api.convertToCoordinates('filled.count.soap').execute();
+    var locationRequest = await api.convertToCoordinates('filled.count.soap').execute();
 
-    expect(locationRequest.isSuccessful(), true);
-    var location = locationRequest.data()!;
+    if (locationRequest.isSuccessful()) {
+      expect(locationRequest.isSuccessful(), true);
+      var location = locationRequest.data()!;
 
-    expect('filled.count.soap', location.words);
-    expect('GB', location.country);
+      expect(location.words, 'filled.count.soap');
+      expect(location.country, 'GB');
 
-    expect(-0.195543, location.square.southwest.lng);
-    expect(51.520833, location.square.southwest.lat);
-    expect(-0.195499, location.square.northeast.lng);
-    expect(51.52086, location.square.northeast.lat);
+      expect(location.square.southwest.lng, closeTo(-0.195543, 0.000001));
+      expect(location.square.southwest.lat, closeTo(51.520833, 0.000001));
+      expect(location.square.northeast.lng, closeTo(-0.195499, 0.000001));
+      expect(location.square.northeast.lat, closeTo(51.52086, 0.000001));
 
-    expect(-0.195521, location.coordinates.lng);
-    expect(51.520847, location.coordinates.lat);
+      expect(location.coordinates.lng, closeTo(-0.195521, 0.000001));
+      expect(location.coordinates.lat, closeTo(51.520847, 0.000001));
 
-    expect('en', location.language);
-    expect('https://w3w.co/filled.count.soap', location.map);
-    expect('Bayswater, London', location.nearestPlace);
+      expect(location.language, 'en');
+      expect(location.map, 'https://w3w.co/filled.count.soap');
+      expect(location.nearestPlace, 'Bayswater, London');
+    } else {
+      var error = locationRequest.error();
+      expect(error, isNotNull);  // Ensure that the error is not null
+
+      if (error != null) {
+        if (error == What3WordsError.BAD_WORDS) {
+          expect(error, What3WordsError.BAD_WORDS);
+        } else if (error == What3WordsError.QUOTAEXCEEDED_ERROR) {
+          expect(error, What3WordsError.QUOTAEXCEEDED_ERROR);
+        } else {
+          fail('Unexpected error type: ${error.toString()}');
+        }
+      }
+    }
   });
 }

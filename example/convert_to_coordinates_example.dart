@@ -15,6 +15,9 @@ void main() async {
     if (error == What3WordsError.BAD_WORDS) {
       // The three word address provided is invalid
       print('BadWords: ${error!.message}');
+    } else if (error == What3WordsError.QUOTAEXCEEDED_ERROR) {
+      // QuotaExceeded Error
+      print('QuotaExceeded: ${error!.message}');
     } else if (error == What3WordsError.INTERNAL_SERVER_ERROR) {
       // Server Error
       print('InternalServerError: ${error!.message}');

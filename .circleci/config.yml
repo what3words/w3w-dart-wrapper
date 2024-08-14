@@ -1,18 +1,21 @@
 version: 2.1
 
-jobs: # a basic unit of work in a run
-  test: # your job name
+jobs:
+  test:
     macos:
-      xcode: 15.3.0 # version of Xcode
+      xcode: 15.4.0
     steps:
-      - checkout  # pull down code from
+      - checkout
       - run:
-          name: Run Unit Tests  # we must build the package's tests as an iOS exectuable, and output the profile data, then send that to sonar. Also, a kluge was required to get the apikey in place
-          command: |-
+          name: Install Dart
+          command: |
             brew tap dart-lang/dart
             brew install dart
+      - run:
+          name: Run Unit Tests
+          command: |
             dart test
-          
+
 workflows:
   version: 2
   test_build:
