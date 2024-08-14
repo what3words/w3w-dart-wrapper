@@ -2,37 +2,35 @@ import 'dart:async';
 import 'package:chopper/chopper.dart';
 import 'package:os_detect/os_detect.dart' as _platform;
 
-class HeaderInterceptor implements RequestInterceptor {
-  // This version must be updated in tandem with the pubspec version.
+class HeaderInterceptor implements Interceptor {
   static const String APP_VERSION = '3.0.3';
-
-  static final String auth_header = 'X-API-KEY';
-  static final String w3w_wrapper = 'X-W3W-Wrapper';
+  static final String authHeader = 'X-API-KEY';
+  static final String w3wWrapper = 'X-W3W-Wrapper';
 
   final String _apiKey;
   final Map<String, String>? _headers;
-
   final String _userAgent;
 
-  HeaderInterceptor(apiKey, headers)
-      : _apiKey = apiKey,
-        _headers = headers,
-        _userAgent = getUserAgent();
+  HeaderInterceptor(this._apiKey, this._headers)
+      : _userAgent = _getUserAgent();
 
-  static String getUserAgent() {
+  static String _getUserAgent() {
     return 'what3words-Dart/$APP_VERSION (${_platform.operatingSystem}; ${_platform.operatingSystemVersion})';
   }
 
   @override
-  FutureOr<Request> onRequest(Request request) async {
-    var headers = <String, String>{
-      auth_header: _apiKey,
-      w3w_wrapper: _userAgent
-    };
+  FutureOr<Response<BodyType>> intercept<BodyType>(Chain<BodyType> chain) async {
+    final request = chain.request;
+    final headers = Map<String, String>.from(request.headers);
 
-    _headers?.forEach((k, v) => headers[k] = v);
+    headers[authHeader] = _apiKey;
+    headers[w3wWrapper] = _userAgent;
 
-    var newRequest = request.copyWith(headers: headers);
-    return newRequest;
+    if (_headers != null) {
+      headers.addAll(_headers!);
+    }
+
+    final modifiedRequest = request.copyWith(headers: headers);
+    return chain.proceed(modifiedRequest);
   }
 }

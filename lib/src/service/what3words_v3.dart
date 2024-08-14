@@ -12,7 +12,7 @@ import 'what3words_service.dart';
 
 ///Instances of the What3WordsV3 class provide access to Version 3 of the what3words API.
 class What3WordsV3 {
-  final _defaultEndpoint = 'https://api.what3words.com/v3';
+  final _defaultEndpoint = "api.what3words.com/v3";
   late What3WordsV3Service _service;
 
   ///Get a new API manager instance.

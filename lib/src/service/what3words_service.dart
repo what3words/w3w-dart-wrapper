@@ -74,10 +74,16 @@ abstract class What3WordsV3Service extends ChopperService {
 
   static What3WordsV3Service create(
       String? apiKey, String endpoint, Map<String, String>? headers) {
+    if (apiKey == null) {
+      throw ArgumentError('API key must not be null');
+    }
     final client = ChopperClient(
-        baseUrl: endpoint,
+        baseUrl: Uri(
+            scheme: "https",
+            host: endpoint.split("/")[0],
+            path: endpoint.split("/")[1]),
         interceptors: [
-          HeaderInterceptor(apiKey, headers),
+          HeaderInterceptor(apiKey, headers), 
           HttpLoggingInterceptor()
         ],
         errorConverter: JsonConverter(),
