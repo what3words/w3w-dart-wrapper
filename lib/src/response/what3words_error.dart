@@ -27,9 +27,9 @@ class What3WordsError {
   static What3WordsError INTERNAL_SERVER_ERROR =
       What3WordsError('InternalServerError');
   static What3WordsError INVALID_KEY = What3WordsError('InvalidKey');
-  static What3WordsError QUOTAEXCEEDED_ERROR = What3WordsError('QuotaExceeded');
   static What3WordsError UNKNOWN_ERROR = What3WordsError('UnknownError');
   static What3WordsError NETWORK_ERROR = What3WordsError('NetworkError');
+  static What3WordsError QUOTA_EXCEEDED = What3WordsError('QuotaExceeded');
 
   String code;
   String? message;
@@ -69,12 +69,12 @@ class What3WordsError {
         return INTERNAL_SERVER_ERROR;
       case 'InvalidKey':
         return INVALID_KEY;
-      case 'QuotaExceeded':
-        return QUOTAEXCEEDED_ERROR;
       case 'UnknownError':
         return UNKNOWN_ERROR;
       case 'NetworkError':
         return NETWORK_ERROR;
+      case 'QuotaExceeded':
+        return QUOTA_EXCEEDED;
       default:
         return UNKNOWN_ERROR;
     }

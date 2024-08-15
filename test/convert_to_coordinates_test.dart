@@ -16,8 +16,8 @@ void main() {
     if (error != null) {
       if (error == What3WordsError.BAD_WORDS) {
         expect(error, What3WordsError.BAD_WORDS);
-      } else if (error == What3WordsError.QUOTAEXCEEDED_ERROR) {
-        expect(error, What3WordsError.QUOTAEXCEEDED_ERROR);
+      } else if (error == What3WordsError.QUOTA_EXCEEDED) {
+        expect(error, What3WordsError.QUOTA_EXCEEDED);
       } else {
         fail('Unexpected error type: ${error.toString()}');
       }
@@ -52,8 +52,8 @@ void main() {
       if (error != null) {
         if (error == What3WordsError.BAD_WORDS) {
           expect(error, What3WordsError.BAD_WORDS);
-        } else if (error == What3WordsError.QUOTAEXCEEDED_ERROR) {
-          expect(error, What3WordsError.QUOTAEXCEEDED_ERROR);
+        } else if (error == What3WordsError.QUOTA_EXCEEDED) {
+          expect(error, What3WordsError.QUOTA_EXCEEDED);
         } else {
           fail('Unexpected error type: ${error.toString()}');
         }
