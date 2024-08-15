@@ -3,7 +3,7 @@ import 'package:chopper/chopper.dart';
 import 'package:os_detect/os_detect.dart' as _platform;
 
 class HeaderInterceptor implements Interceptor {
-  static const String APP_VERSION = '3.0.3';
+  static const String APP_VERSION = '3.2.0';
   static final String authHeader = 'X-API-KEY';
   static final String w3wWrapper = 'X-W3W-Wrapper';
 

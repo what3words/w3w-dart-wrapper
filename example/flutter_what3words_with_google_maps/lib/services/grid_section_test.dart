@@ -47,11 +47,14 @@ class _GridSectionPageState extends State<GridSectionPage> {
         center: LatLng(51.520847, -0.195521),
         zoom: 15,
       ),
-      layers: [
-        TileLayerOptions(
+      children: [
+        TileLayer(
             urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-            subdomains: ['a', 'b', 'c']),
-        PolylineLayerOptions(polylines: multilines),
+            subdomains: ['a', 'b', 'c'],
+          ),
+          PolylineLayer(
+            polylines: multilines,
+          ),
       ],
     ));
   }

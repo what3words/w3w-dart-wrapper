@@ -8,7 +8,7 @@ import 'package:what3words/what3words.dart';
 
 class _GridSectionPageState extends State<GridSectionPage> {
   late GoogleMapController mapController;
-  final api = What3WordsV3('08L3S2A9');
+  final api = What3WordsV3('W3W_API_KEY');
   List<Polyline> polylines = [];
 
   static const _initialPosition = CameraPosition(

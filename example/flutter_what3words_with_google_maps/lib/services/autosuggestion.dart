@@ -12,7 +12,7 @@ class _AutoSuggestionPageState extends State<AutoSuggestionPage> {
   late TextEditingController _twaController;
   late String errorMessage;
   final Set<Marker> _markers = {};
-  final api = What3WordsV3('08L3S2A9');
+  final api = What3WordsV3('W3W_API_KEY');
   String twaHolder = '';
   bool isAnError = true;
   List<String> suggestedWordList = [];
@@ -153,8 +153,8 @@ class _AutoSuggestionPageState extends State<AutoSuggestionPage> {
   }
 
   final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
-    onPrimary: Colors.blue,
-    primary: Colors.blue[100],
+    foregroundColor: Colors.blue,  // Replaces 'onPrimary'
+    backgroundColor: Colors.blue[100],  // Replaces 'primary'
     minimumSize: const Size(58, 58),
     padding: const EdgeInsets.symmetric(horizontal: 10),
   );

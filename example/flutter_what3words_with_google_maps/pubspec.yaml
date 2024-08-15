@@ -35,11 +35,11 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   google_maps_flutter: ^2.0.11
-  google_maps_flutter_web: ^0.3.2
-  what3words: ^3.1.0-nullsafety.3
-  syncfusion_flutter_maps: ^19.3.47-beta
+  google_maps_flutter_web: ^0.5.10
+  what3words: ^3.2.0-nullsafety.3
+  syncfusion_flutter_maps: ^26.2.9
   geojson: ^1.0.0
-  flutter_map: ^0.14.0
+  flutter_map: ^4.0.0
 
 
 dev_dependencies:
@@ -51,7 +51,10 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^1.0.0
+  flutter_lints: ^4.0.0
+
+dependency_overrides:
+  http: ^1.2.2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
