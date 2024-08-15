@@ -9,6 +9,8 @@ import '../request/convert_to_coordinates_request.dart';
 import '../request/coordinate.dart';
 import '../request/grid_section_request.dart';
 import 'what3words_service.dart';
+import 'package:what3words/src/response/what3words_error.dart';
+import 'package:what3words/src/response/isvalid3wa_response.dart';
 
 ///Instances of the What3WordsV3 class provide access to Version 3 of the what3words API.
 class What3WordsV3 {
@@ -52,7 +54,7 @@ class What3WordsV3 {
     var regex = RegExp(r"^\/{0,}(?:[^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?\/"'"'r";:£§º©®\s]{1,}[.｡。･・︒។։။۔።।][^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?\/"'"'r";:£§º©®\s]{1,}[.｡。･・︒។։။۔።।][^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?\/"'"'r";:£§º©®\s]{1,}|[^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?\/"'"'r";:£§º©®\s]{1,}([\u0020\u00A0][^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?\/"'"'r";:£§º©®\s]+){1,3}[.｡。･・︒។։။۔።।][^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?\/"'"'r";:£§º©®\s]{1,}([\u0020\u00A0][^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?\/"'"'r";:£§º©®\s]+){1,3}[.｡。･・︒។։။۔።।][^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?\/"'"'r";:£§º©®\s]{1,}([\u0020\u00A0][^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?\/"'"'r";:£§º©®\s]+){1,3})$");
     return regex.hasMatch(text);
   }
-
+   
   /// Check if a string is a possible what3words address with different separators.
   ///
   /// [text] The string to check.
@@ -67,33 +69,9 @@ class What3WordsV3 {
   /// [text] The string to search.
   /// Returns a list of possible what3words addresses.
   List<String> findPossible3wa(String text) {
-    var regex = new RegExp("(?:\\p{L}\\p{M}*){1,}[.｡。･・︒។։။۔።।](?:\\p{L}\\p{M}*){1,}[.｡。･・︒។։။۔።।](?:\\p{L}\\p{M}*){1,}");
+    var regex = RegExp(r"[^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?\/"'"'r";:£§º©®\s]{1,}[.｡。･・︒។։။۔።।][^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?\/"'"'r";:£§º©®\s]{1,}[.｡。･・︒។։။۔።।][^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?\/"'"'r';:£§º©®\s]{1,}');
     var matches = regex.allMatches(text);
     return matches.map((match) => match.group(0) ?? "").toList();  
-  }
-
-  /// Check if a what3words address is valid by verifying it against the API.
-  ///
-  /// [words] The what3words address to validate.
-  /// Returns true if the address is valid, false otherwise.
-  Future<bool> isValid3wa(String words) async {
-    if (!isPossible3wa(words)) {
-      return false;
-    }
-
-    var autosuggestResult = await autosuggest(words).execute();
-    if (!autosuggestResult.isSuccessful()) {
-      return false;
-    }
-
-    for (var suggestion in autosuggestResult.data()?.suggestions ?? []) {
-      if (suggestion.words.replaceAll("/", "").toLowerCase() ==
-          words.replaceAll("/", "").toLowerCase()) {
-        return true;
-      }
-    }
-
-    return false;
   }
 
   ///Convert a 3 word address to a latitude and longitude. It also returns country, the bounds of the grid square,
@@ -178,7 +156,63 @@ class What3WordsV3 {
     return AutosuggestSelectionRequestBuilder(this, rawInput, sourceApi, words, rank, options);
   }
 
+  /// This function checks whether a given what3words address is valid.
+  ///
+  /// The function first verifies if the input string is a possible 
+  /// what3words address format by using the `isPossible3wa` method. 
+  /// If the format is invalid, it returns an error indicating 
+  /// `BAD_WORDS`. 
+  ///
+  /// If the input format is correct, the function then calls the 
+  /// `autosuggest` API with a limit of one result. The function 
+  /// evaluates the response from the API:
+  /// - If the API request fails, it checks if the failure is due to 
+  /// an invalid API key (`INVALID_KEY`) or some other error, and 
+  /// returns the appropriate error response.
+  /// - If the request is successful and the first suggestion matches 
+  /// the input address, it returns a success response indicating 
+  /// that the address is valid.
+  ///
+  /// If no valid match is found, the function returns a `BAD_WORDS` 
+  /// error, indicating that the address is not recognized as a valid 
+  /// what3words address.
+  ///
+  /// Returns:
+  /// - `IsValid3waResponse`: A custom response object indicating 
+  /// whether the address is valid and if any errors occurred.
+  ///
+  /// Example:
+  /// ```dart
+  /// var response = await api.isValid3wa("filled.count.soap");
+  /// if (response.isSuccessful() && response.isValid == true) {
+  ///   print("Valid address");
+  /// } else {
+  ///   print("Invalid address or error: ${response.error?.message}");
+  /// }
+  /// ```
+  Future<IsValid3waResponse> isValid3wa(String words) async {
+    if (!isPossible3wa(words)) {
+      return IsValid3waResponse.success(false);
+    }
+
+    var autosuggestResult = await autosuggest(words, options: AutosuggestOptions().setNResults(1)).execute();
+
+    if (!autosuggestResult.isSuccessful()) {
+      return IsValid3waResponse.error(autosuggestResult.error()!);
+    }
+
+    for (var suggestion in autosuggestResult.data()?.suggestions ?? []) {
+      if (suggestion.words.replaceAll("/", "").toLowerCase() ==
+          words.replaceAll("/", "").toLowerCase()) {
+        return IsValid3waResponse.success(true);
+      }
+    }
+
+    return IsValid3waResponse.success(false);
+  }
+
   What3WordsV3Service what3words() {
     return _service;
   }
 }
+

@@ -20,5 +20,6 @@ export 'src/response/language.dart';
 export 'src/response/location.dart';
 export 'src/response/coordinates.dart';
 export 'src/response/what3words_error.dart';
+export 'src/response/isvalid3wa_response.dart';
 
 export 'src/service/what3words_v3.dart';
