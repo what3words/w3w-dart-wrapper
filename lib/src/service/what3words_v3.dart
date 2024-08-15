@@ -44,6 +44,58 @@ class What3WordsV3 {
     _service = What3WordsV3Service.create(apiKey, endpoint, headers);
   }
 
+  /// Check if a string is a possible what3words address using regex.
+  ///
+  /// [text] The string to check.
+  /// Returns true if it's a match against the regex, false otherwise.
+  bool isPossible3wa(String text) {
+    var regex = RegExp(r"^\/{0,}(?:[^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?\/"'"'r";:£§º©®\s]{1,}[.｡。･・︒។։။۔።।][^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?\/"'"'r";:£§º©®\s]{1,}[.｡。･・︒។։။۔።।][^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?\/"'"'r";:£§º©®\s]{1,}|[^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?\/"'"'r";:£§º©®\s]{1,}([\u0020\u00A0][^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?\/"'"'r";:£§º©®\s]+){1,3}[.｡。･・︒។։။۔።।][^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?\/"'"'r";:£§º©®\s]{1,}([\u0020\u00A0][^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?\/"'"'r";:£§º©®\s]+){1,3}[.｡。･・︒។։။۔።।][^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?\/"'"'r";:£§º©®\s]{1,}([\u0020\u00A0][^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?\/"'"'r";:£§º©®\s]+){1,3})$");
+    return regex.hasMatch(text);
+  }
+
+  /// Check if a string is a possible what3words address with different separators.
+  ///
+  /// [text] The string to check.
+  /// Returns true if it's a match against the regex, false otherwise.
+  bool didYouMean3wa(String text) {
+    var regex = RegExp(r"[^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?\/"'"'r";:£§º©®\s]{1,}[.｡。･・︒។։။۔።। ,\\\\^_/+'&:;|　-]{1,2}[^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?\/"'"'r";:£§º©®\s]{1,}[.｡。･・︒។։။۔።। ,\\\\^_/+'&:;|　-]{1,2}[^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?\/"'"'r';:£§º©®\s]{1,}');
+    return regex.hasMatch(text);
+  }
+
+  /// Find all possible what3words addresses in a string.
+  ///
+  /// [text] The string to search.
+  /// Returns a list of possible what3words addresses.
+  List<String> findPossible3wa(String text) {
+    var regex = new RegExp("(?:\\p{L}\\p{M}*){1,}[.｡。･・︒។։။۔።।](?:\\p{L}\\p{M}*){1,}[.｡。･・︒។։။۔።।](?:\\p{L}\\p{M}*){1,}");
+    var matches = regex.allMatches(text);
+    return matches.map((match) => match.group(0) ?? "").toList();  
+  }
+
+  /// Check if a what3words address is valid by verifying it against the API.
+  ///
+  /// [words] The what3words address to validate.
+  /// Returns true if the address is valid, false otherwise.
+  Future<bool> isValid3wa(String words) async {
+    if (!isPossible3wa(words)) {
+      return false;
+    }
+
+    var autosuggestResult = await autosuggest(words).execute();
+    if (!autosuggestResult.isSuccessful()) {
+      return false;
+    }
+
+    for (var suggestion in autosuggestResult.data()?.suggestions ?? []) {
+      if (suggestion.words.replaceAll("/", "").toLowerCase() ==
+          words.replaceAll("/", "").toLowerCase()) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
   ///Convert a 3 word address to a latitude and longitude. It also returns country, the bounds of the grid square,
   ///a nearest place (such as a local town) and a link to our map site.
   ///
