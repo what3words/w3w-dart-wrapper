@@ -64,7 +64,7 @@ class LocationFormState extends State<LocationForm> {
         children: <Widget>[
           twaInput,
           convertToCoordsButton,
-          Text('$twaHolder', style: TextStyle(fontSize: 21))
+          Text(twaHolder, style: TextStyle(fontSize: 21))
         ],
       ),
     );

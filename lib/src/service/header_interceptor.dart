@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:chopper/chopper.dart';
-import 'package:os_detect/os_detect.dart' as _platform;
+import 'package:os_detect/os_detect.dart' as platform;
 
 class HeaderInterceptor implements Interceptor {
   static const String APP_VERSION = '3.2.0';
@@ -15,7 +15,7 @@ class HeaderInterceptor implements Interceptor {
       : _userAgent = _getUserAgent();
 
   static String _getUserAgent() {
-    return 'what3words-Dart/$APP_VERSION (${_platform.operatingSystem}; ${_platform.operatingSystemVersion})';
+    return 'what3words-Dart/$APP_VERSION (${platform.operatingSystem}; ${platform.operatingSystemVersion})';
   }
 
   @override
@@ -27,7 +27,7 @@ class HeaderInterceptor implements Interceptor {
     headers[w3wWrapper] = _userAgent;
 
     if (_headers != null) {
-      headers.addAll(_headers!);
+      headers.addAll(_headers);
     }
 
     final modifiedRequest = request.copyWith(headers: headers);

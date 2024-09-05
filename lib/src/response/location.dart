@@ -9,6 +9,7 @@ class Location {
   String words;
   String language;
   String map;
+  String? locale;  // Add the locale field, which can be null
 
   Location(
       {required this.country,
@@ -17,10 +18,10 @@ class Location {
       required this.coordinates,
       required this.words,
       required this.language,
-      required this.map});
+      required this.map,
+      this.locale}); // Add locale to the constructor as an optional parameter
 
-  factory Location.fromJson(Map<String, dynamic> json) =>
-      _$LocationFromJson(json);
+  factory Location.fromJson(Map<String, dynamic> json) => _$LocationFromJson(json);
 
   Map<String, dynamic> toJson() => _$LocationToJson(this);
 }
@@ -37,18 +38,18 @@ class Square {
   Map<String, dynamic> toJson() => _$SquareToJson(this);
 }
 
-//toJson, fromJson
+// toJson, fromJson
 
 Location _$LocationFromJson(Map<String, dynamic> json) {
   return Location(
     country: json['country'] as String,
     square: Square.fromJson(json['square'] as Map<String, dynamic>),
     nearestPlace: json['nearestPlace'] as String,
-    coordinates: CoordinatesResponse.fromJson(
-        json['coordinates'] as Map<String, dynamic>),
+    coordinates: CoordinatesResponse.fromJson(json['coordinates'] as Map<String, dynamic>),
     words: json['words'] as String,
     language: json['language'] as String,
     map: json['map'] as String,
+    locale: json['locale'] as String?,
   );
 }
 
@@ -60,6 +61,7 @@ Map<String, dynamic> _$LocationToJson(Location instance) => <String, dynamic>{
   'words': instance.words,
   'language': instance.language,
   'map': instance.map,
+  if (instance.locale != null) 'locale': instance.locale,
 };
 
 Square _$SquareFromJson(Map<String, dynamic> json) {

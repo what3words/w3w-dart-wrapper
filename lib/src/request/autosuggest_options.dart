@@ -12,6 +12,7 @@ class AutosuggestOptions {
   String? _inputType;
   String? _language;
   String? _preferLand;
+  String? _locale;
 
   String? get nResults => _nResults;
   String? get focus => _focus;
@@ -23,6 +24,7 @@ class AutosuggestOptions {
   String? get inputType => _inputType;
   String? get language => _language;
   String? get preferLand => _preferLand;
+  String? get locale => _locale; 
 
   ///Set the number of AutoSuggest results to return. A maximum of 100 results can be specified, if a number greater than this is requested,
   ///this will be truncated to the maximum. The default is 3
@@ -122,6 +124,12 @@ class AutosuggestOptions {
   ///Returns an [AutosuggestOptions] instance suitable to allow more query customisation
   AutosuggestOptions setLanguage(String language) {
     _language = language;
+    return this;
+  }
+
+   /// Sets the locale for the AutoSuggest request
+  AutosuggestOptions setLocale(String locale) {
+    _locale = locale;  // Setter for locale
     return this;
   }
 

@@ -3,7 +3,6 @@ import '../response/response.dart';
 import 'request.dart';
 import 'abstract_builder.dart';
 import '../response/language.dart';
-import '../service/what3words_v3.dart';
 
 class AvailableLanguagesRequest extends Request<Language> {
   AvailableLanguagesRequest._builder(AvailableLanguagesRequestBuilder builder)
@@ -18,7 +17,7 @@ class AvailableLanguagesRequest extends Request<Language> {
 /// Builder for `available-languages` API requests
 class AvailableLanguagesRequestBuilder
     extends AbstractBuilder<Future<Response<Language>>> {
-  AvailableLanguagesRequestBuilder(What3WordsV3 api) : super(api);
+  AvailableLanguagesRequestBuilder(super.api);
 
   ///Execute the API call as represented by the values set within this [AvailableLanguagesRequestBuilder]
   ///

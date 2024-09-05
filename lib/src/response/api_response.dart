@@ -17,7 +17,7 @@ class APIResponse<T> {
   }
 
   T? body() {
-    return response == null ? null : response!.body;
+    return response?.body;
   }
 
   void setError(What3WordsError error) {

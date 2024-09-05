@@ -9,7 +9,6 @@ import '../request/convert_to_coordinates_request.dart';
 import '../request/coordinate.dart';
 import '../request/grid_section_request.dart';
 import 'what3words_service.dart';
-import 'package:what3words/src/response/what3words_error.dart';
 import 'package:what3words/src/response/isvalid3wa_response.dart';
 
 ///Instances of the What3WordsV3 class provide access to Version 3 of the what3words API.

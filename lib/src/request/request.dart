@@ -18,7 +18,7 @@ class Request<T> {
       if (!apiResponse.isSuccessful()) {
         Map errorResponse = response.error;
 
-        var apiError;
+        APIError apiError;
         try {
           apiError = APIError(errorResponse['error']['code'],
               errorResponse['error']['message']);
@@ -67,7 +67,7 @@ class EmptyRequest {
       if (!apiResponse.isSuccessful()) {
         Map errorResponse = response.error;
 
-        var apiError;
+        APIError apiError;
         try {
           apiError = APIError(errorResponse['error']['code'],
               errorResponse['error']['message']);

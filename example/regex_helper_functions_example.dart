@@ -34,14 +34,14 @@ void main() async {
   }
 
   print("\n-------Example 4: Using isValid3wa-------\n");
-  List<String> w3w_addresses = [
+  List<String> w3wAddresses = [
     "filled.count.soap",
     "filled.count.",
     "coding.is.cool"
   ];
 
   // Iterate over the list and check if each address is valid
-  for (String w3w_address in w3w_addresses) {
+  for (String w3w_address in w3wAddresses) {
     var response = await api.isValid3wa(w3w_address);
 
     if (response.isSuccessful() && response.isValid == true) {
