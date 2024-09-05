@@ -21,6 +21,7 @@ abstract class What3WordsV3Service extends ChopperService {
   Future<Response<Location>> convertTo3wa(
       @Query('coordinates') String coordinates,
       @Query('language') String? language);
+      // @Query('locale') String? locale); 
 
   @Get(path: 'grid-section')
   Future<Response<GridSection>> gridSection(
@@ -38,21 +39,23 @@ abstract class What3WordsV3Service extends ChopperService {
       @Query('clip-to-polygon') String? clipToPolygon,
       @Query('input-type') String? inputType,
       @Query('language') String? lang,
-      @Query('prefer-land') String? preferLand);
+      @Query('prefer-land') String? preferLand,
+      @Query('locale') String? locale);  
 
   @Get(path: 'autosuggest-with-coordinates')
   Future<Response<AutosuggestWithCoordinates>> autosuggestWithCoordinates(
       @Query('input') String input,
-      @Query('n-results') String nResults,
-      @Query('focus') String focus,
-      @Query('n-focus-results') String nFocusResults,
-      @Query('clip-to-country') String clipToCountry,
-      @Query('clip-to-bounding-box') String clipToBoundingBox,
-      @Query('clip-to-circle') String clipToCircle,
-      @Query('clip-to-polygon') String clipToPolygon,
-      @Query('input-type') String inputType,
-      @Query('language') String lang,
-      @Query('prefer-land') String preferLand);
+      @Query('n-results') String? nResults,
+      @Query('focus') String? focus,
+      @Query('n-focus-results') String? nFocusResults,
+      @Query('clip-to-country') String? clipToCountry,
+      @Query('clip-to-bounding-box') String? clipToBoundingBox,
+      @Query('clip-to-circle') String? clipToCircle,
+      @Query('clip-to-polygon') String? clipToPolygon,
+      @Query('input-type') String? inputType,
+      @Query('language') String? lang,
+      @Query('prefer-land') String? preferLand,
+      @Query('locale') String? locale);   
 
   @Get(path: 'autosuggest-selection')
   Future<Response<String>> autosuggestSelection(
@@ -60,16 +63,17 @@ abstract class What3WordsV3Service extends ChopperService {
       @Query('source-api') String sourceApi,
       @Query('selection') String selection,
       @Query('rank') int rank,
-      @Query('n-results') String nResults,
-      @Query('focus') String focus,
-      @Query('n-focus-results') String nFocusResults,
-      @Query('clip-to-country') String clipToCountry,
-      @Query('clip-to-bounding-box') String clipToBoundingBox,
-      @Query('clip-to-circle') String clipToCircle,
-      @Query('clip-to-polygon') String clipToPolygon,
-      @Query('input-type') String inputType,
-      @Query('language') String lang,
-      @Query('prefer-land') String preferLand);
+      @Query('n-results') String? nResults,
+      @Query('focus') String? focus,
+      @Query('n-focus-results') String? nFocusResults,
+      @Query('clip-to-country') String? clipToCountry,
+      @Query('clip-to-bounding-box') String? clipToBoundingBox,
+      @Query('clip-to-circle') String? clipToCircle,
+      @Query('clip-to-polygon') String? clipToPolygon,
+      @Query('input-type') String? inputType,
+      @Query('language') String? lang,
+      @Query('prefer-land') String? preferLand,
+      @Query('locale') String? locale);  
 
 
   static What3WordsV3Service create(

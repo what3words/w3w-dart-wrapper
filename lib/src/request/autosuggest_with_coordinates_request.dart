@@ -1,8 +1,6 @@
 import 'package:what3words/src/request/request.dart';
-import 'package:what3words/src/response/response.dart';
 
 import '../../what3words.dart';
-import 'autosuggest_options.dart';
 import 'abstract_builder.dart';
 
 class AutosuggestWithCoordinatesRequest extends Request<AutosuggestWithCoordinates> {
@@ -17,6 +15,7 @@ class AutosuggestWithCoordinatesRequest extends Request<AutosuggestWithCoordinat
   final String? inputType;
   final String? language;
   final String? preferLand;
+  final String? locale; 
 
   AutosuggestWithCoordinatesRequest._builder(AutosuggestWithCoordinatesRequestBuilder builder)
       : input = builder._input,
@@ -30,6 +29,7 @@ class AutosuggestWithCoordinatesRequest extends Request<AutosuggestWithCoordinat
         inputType = builder._options?.inputType,
         language = builder._options?.language,
         preferLand = builder._options?.preferLand,
+        locale = builder._options?.locale, 
         super(builder.api);
 
   Future<Response<AutosuggestWithCoordinates>> execute() async {
@@ -44,7 +44,8 @@ class AutosuggestWithCoordinatesRequest extends Request<AutosuggestWithCoordinat
       clipToPolygon,
       inputType,
       language,
-      preferLand
+      preferLand,
+      locale
     ]);
   }
 }

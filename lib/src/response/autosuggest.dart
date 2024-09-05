@@ -29,7 +29,7 @@ class Suggestion {
       this.distanceToFocusKm,
       required this.rank,
       required this.language,
-      this.locale});  // Initialize locale
+      this.locale});  
 
   factory Suggestion.fromJson(Map<String, dynamic> json) =>
       _$SuggestionFromJson(json);
@@ -79,13 +79,12 @@ class SuggestionWithCoordinates {
       this.distanceToFocusKm,
       required this.rank,
       required this.language,
-      this.locale});  // Initialize locale
+      this.locale}); 
 
   factory SuggestionWithCoordinates.fromJson(Map<String, dynamic> json) =>
       _$SuggestionWithCoordinatesFromJson(json);
 
   Map<String, dynamic> toJson() {
-    // Logic for handling locale and language
     return {
       'country': country,
       'nearestPlace': nearestPlace,
@@ -94,7 +93,7 @@ class SuggestionWithCoordinates {
       'distanceToFocusKm': distanceToFocusKm,
       'rank': rank,
       'language': language,
-      'locale': locale ?? language,  // Use locale if available, otherwise fallback to language
+      'locale': locale ?? language,  
     };
   }
 }
@@ -121,7 +120,7 @@ Suggestion _$SuggestionFromJson(Map<String, dynamic> json) {
     distanceToFocusKm: json['distanceToFocusKm'] as int?,
     rank: json['rank'] as int,
     language: json['language'] as String,
-    locale: json['locale'] as String?,  // Load locale if present
+    locale: json['locale'] as String?, 
   );
 }
 
@@ -133,7 +132,7 @@ Map<String, dynamic> _$SuggestionToJson(Suggestion instance) =>
       'distanceToFocusKm': instance.distanceToFocusKm,
       'rank': instance.rank,
       'language': instance.language,
-      'locale': instance.locale,  // Output locale if available
+      'locale': instance.locale,  
     };
 
 AutosuggestWithCoordinates _$AutosuggestWithCoordinatesFromJson(
@@ -163,7 +162,7 @@ SuggestionWithCoordinates _$SuggestionWithCoordinatesFromJson(
     distanceToFocusKm: json['distanceToFocusKm'] as int?,
     rank: json['rank'] as int,
     language: json['language'] as String,
-    locale: json['locale'] as String?,  // Load locale if present
+    locale: json['locale'] as String?, 
   );
 }
 
@@ -177,5 +176,5 @@ Map<String, dynamic> _$SuggestionWithCoordinatesToJson(
       'distanceToFocusKm': instance.distanceToFocusKm,
       'rank': instance.rank,
       'language': instance.language,
-      'locale': instance.locale,  // Output locale if available
+      'locale': instance.locale,  
     };
