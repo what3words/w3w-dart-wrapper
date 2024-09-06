@@ -3,7 +3,6 @@ import 'package:what3words/src/response/response.dart';
 import '../response/location.dart';
 import 'coordinate.dart';
 import 'abstract_builder.dart';
-import '../service/what3words_v3.dart';
 import 'request.dart';
 
 class ConvertTo3WARequest extends Request<Location> {
@@ -26,9 +25,8 @@ class ConvertTo3WARequestBuilder extends AbstractBuilder<Future<Response<Locatio
   final String _coordinates;
   String? _language;
 
-  ConvertTo3WARequestBuilder(What3WordsV3 api, Coordinates coordinates)
-      : _coordinates = '${coordinates.lat}, ${coordinates.lng}',
-        super(api);
+  ConvertTo3WARequestBuilder(super.api, Coordinates coordinates)
+      : _coordinates = '${coordinates.lat}, ${coordinates.lng}';
 
   ///Set the language to return the 3 word address in
   ///

@@ -11,7 +11,7 @@ void main() {
         await api.autosuggest('index.home.ra', options: options).execute();
 
     var suggestions = autosuggest.data()!.suggestions;
-    print(suggestions);
+    // print(suggestions);
     expect(autosuggest.isSuccessful(), true);
     var found = false;
     for (var s in suggestions) {

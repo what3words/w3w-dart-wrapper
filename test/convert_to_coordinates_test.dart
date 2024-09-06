@@ -60,4 +60,34 @@ void main() {
       }
     }
   });
+  // New test for locale parameter
+  test('valid3waWithLocaleTest', () async {
+    var locationRequest = await api
+        .convertToCoordinates('seruuhen.zemseg.dagaldah')
+        .execute();
+
+    if (locationRequest.isSuccessful()) {
+      expect(locationRequest.isSuccessful(), true);
+      var location = locationRequest.data()!;
+
+      expect(location.words, 'seruuhen.zemseg.dagaldah');
+      expect(location.country, 'GB');
+      expect(location.language, 'mn');
+      expect(location.locale, 'mn_la');  
+      expect(location.nearestPlace, 'Лондон');  
+    } else {
+      var error = locationRequest.error();
+      expect(error, isNotNull);
+
+      if (error != null) {
+        if (error == What3WordsError.BAD_WORDS) {
+          expect(error, What3WordsError.BAD_WORDS);
+        } else if (error == What3WordsError.QUOTA_EXCEEDED) {
+          expect(error, What3WordsError.QUOTA_EXCEEDED);
+        } else {
+          fail('Unexpected error type: ${error.toString()}');
+        }
+      }
+    }
+  });
 }
