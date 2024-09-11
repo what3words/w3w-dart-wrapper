@@ -18,7 +18,7 @@ class AutosuggestSelectionRequest extends EmptyRequest {
   final String? inputType;
   final String? language;
   final String? preferLand;
-  final String? locale; 
+  final String? locale;
 
   AutosuggestSelectionRequest._builder(
       AutosuggestSelectionRequestBuilder builder)
@@ -36,7 +36,7 @@ class AutosuggestSelectionRequest extends EmptyRequest {
         inputType = builder._options?.inputType,
         language = builder._options?.language,
         preferLand = builder._options?.preferLand,
-        locale = builder._options?.locale, 
+        locale = builder._options?.locale,
         super(builder.api);
 
   Future<Response<String>> execute() async {
@@ -69,8 +69,8 @@ class AutosuggestSelectionRequestBuilder
   final int? _rank;
   final AutosuggestOptions? _options;
 
-  AutosuggestSelectionRequestBuilder(super.api, this._rawInput,
-      this._sourceApi, this._words, this._rank, this._options);
+  AutosuggestSelectionRequestBuilder(super.api, this._rawInput, this._sourceApi,
+      this._words, this._rank, this._options);
 
   ///Execute the API call as represented by the values set within this [ConvertTo3WARequestBuilder]
   ///

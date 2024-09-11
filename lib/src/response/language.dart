@@ -15,13 +15,13 @@ class Languages {
   String nativeName;
   String code;
   String name;
-  List<Locale>? locales;  // Add the list of locales
+  List<Locale>? locales; // Add the list of locales
 
   Languages({
     required this.nativeName,
     required this.code,
     required this.name,
-    this.locales,  // Include locales in the constructor
+    this.locales, // Include locales in the constructor
   });
 
   factory Languages.fromJson(Map<String, dynamic> json) =>

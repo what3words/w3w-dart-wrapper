@@ -12,9 +12,8 @@ void main() {
     var p3 = Coordinates(51, 1);
 
     var options = AutosuggestOptions().setClipToPolygon([p1, p2, p3, p1]);
-    var autosuggest = await api
-        .autosuggest('index.home.ra', options: options)
-        .execute();
+    var autosuggest =
+        await api.autosuggest('index.home.ra', options: options).execute();
     expect(autosuggest.isSuccessful(), true);
 
     var suggestions = autosuggest.data()!.suggestions;
@@ -36,9 +35,8 @@ void main() {
     var p3 = Coordinates(51, 1);
 
     var options = AutosuggestOptions().setClipToPolygon([p1, p2, p3]);
-    var autosuggest = await api
-        .autosuggest('index.home.ra', options: options)
-        .execute();
+    var autosuggest =
+        await api.autosuggest('index.home.ra', options: options).execute();
 
     expect(autosuggest.isSuccessful(), false);
 
@@ -53,9 +51,8 @@ void main() {
     var p3 = Coordinates(51, 181);
 
     var options = AutosuggestOptions().setClipToPolygon([p1, p2, p3, p1]);
-    var autosuggest = await api
-        .autosuggest('index.home.ra', options: options)
-        .execute();
+    var autosuggest =
+        await api.autosuggest('index.home.ra', options: options).execute();
     expect(autosuggest.isSuccessful(), true);
 
     var suggestions = autosuggest.data()!.suggestions;

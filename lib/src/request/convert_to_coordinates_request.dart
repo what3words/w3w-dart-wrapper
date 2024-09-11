@@ -13,8 +13,7 @@ class ConvertToCoordinatesRequest extends Request<Location> {
         super(builder.api);
 
   Future<Response<Location>> execute() async {
-    return await super
-        .call(api.what3words().convertToCoordinates, [words]);
+    return await super.call(api.what3words().convertToCoordinates, [words]);
   }
 }
 

@@ -20,7 +20,7 @@ class Suggestion {
   int? distanceToFocusKm;
   int rank;
   String language;
-  String? locale;  // Locale can be null
+  String? locale; // Locale can be null
 
   Suggestion(
       {required this.country,
@@ -29,7 +29,7 @@ class Suggestion {
       this.distanceToFocusKm,
       required this.rank,
       required this.language,
-      this.locale});  
+      this.locale});
 
   factory Suggestion.fromJson(Map<String, dynamic> json) =>
       _$SuggestionFromJson(json);
@@ -43,7 +43,8 @@ class Suggestion {
       'distanceToFocusKm': distanceToFocusKm,
       'rank': rank,
       'language': language,
-      'locale': locale ?? language, // Use locale if available, otherwise fallback to language
+      'locale': locale ??
+          language, // Use locale if available, otherwise fallback to language
     };
   }
 }
@@ -69,7 +70,7 @@ class SuggestionWithCoordinates {
   int? distanceToFocusKm;
   int rank;
   String language;
-  String? locale;  // Locale can be null
+  String? locale; // Locale can be null
 
   SuggestionWithCoordinates(
       {required this.country,
@@ -79,7 +80,7 @@ class SuggestionWithCoordinates {
       this.distanceToFocusKm,
       required this.rank,
       required this.language,
-      this.locale}); 
+      this.locale});
 
   factory SuggestionWithCoordinates.fromJson(Map<String, dynamic> json) =>
       _$SuggestionWithCoordinatesFromJson(json);
@@ -93,7 +94,7 @@ class SuggestionWithCoordinates {
       'distanceToFocusKm': distanceToFocusKm,
       'rank': rank,
       'language': language,
-      'locale': locale ?? language,  
+      'locale': locale ?? language,
     };
   }
 }
@@ -120,7 +121,7 @@ Suggestion _$SuggestionFromJson(Map<String, dynamic> json) {
     distanceToFocusKm: json['distanceToFocusKm'] as int?,
     rank: json['rank'] as int,
     language: json['language'] as String,
-    locale: json['locale'] as String?, 
+    locale: json['locale'] as String?,
   );
 }
 
@@ -132,7 +133,7 @@ Map<String, dynamic> _$SuggestionToJson(Suggestion instance) =>
       'distanceToFocusKm': instance.distanceToFocusKm,
       'rank': instance.rank,
       'language': instance.language,
-      'locale': instance.locale,  
+      'locale': instance.locale,
     };
 
 AutosuggestWithCoordinates _$AutosuggestWithCoordinatesFromJson(
@@ -146,7 +147,7 @@ AutosuggestWithCoordinates _$AutosuggestWithCoordinatesFromJson(
 }
 
 Map<String, dynamic> _$AutosuggestWithCoordinatesToJson(
-    AutosuggestWithCoordinates instance) =>
+        AutosuggestWithCoordinates instance) =>
     <String, dynamic>{
       'suggestions': instance.suggestions.map((e) => e.toJson()).toList(),
     };
@@ -162,12 +163,12 @@ SuggestionWithCoordinates _$SuggestionWithCoordinatesFromJson(
     distanceToFocusKm: json['distanceToFocusKm'] as int?,
     rank: json['rank'] as int,
     language: json['language'] as String,
-    locale: json['locale'] as String?, 
+    locale: json['locale'] as String?,
   );
 }
 
 Map<String, dynamic> _$SuggestionWithCoordinatesToJson(
-    SuggestionWithCoordinates instance) =>
+        SuggestionWithCoordinates instance) =>
     <String, dynamic>{
       'country': instance.country,
       'nearestPlace': instance.nearestPlace,
@@ -176,5 +177,5 @@ Map<String, dynamic> _$SuggestionWithCoordinatesToJson(
       'distanceToFocusKm': instance.distanceToFocusKm,
       'rank': instance.rank,
       'language': instance.language,
-      'locale': instance.locale,  
+      'locale': instance.locale,
     };

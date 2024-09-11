@@ -11,15 +11,15 @@ class HeaderInterceptor implements Interceptor {
   final Map<String, String>? _headers;
   final String _userAgent;
 
-  HeaderInterceptor(this._apiKey, this._headers)
-      : _userAgent = _getUserAgent();
+  HeaderInterceptor(this._apiKey, this._headers) : _userAgent = _getUserAgent();
 
   static String _getUserAgent() {
     return 'what3words-Dart/$APP_VERSION (${platform.operatingSystem}; ${platform.operatingSystemVersion})';
   }
 
   @override
-  FutureOr<Response<BodyType>> intercept<BodyType>(Chain<BodyType> chain) async {
+  FutureOr<Response<BodyType>> intercept<BodyType>(
+      Chain<BodyType> chain) async {
     final request = chain.request;
     final headers = Map<String, String>.from(request.headers);
 

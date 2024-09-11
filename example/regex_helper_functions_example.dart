@@ -1,12 +1,15 @@
 import 'package:what3words/what3words.dart';
 
-
 void main() async {
   // Replace 'what3words-api-key' with your actual API key
   var api = What3WordsV3('what3words-api-key');
 
   print("\n-------Example 1: Using isPossible3wa-------\n");
-  List<String> addresses = ["filled.count.soap", "not a 3wa", "not.3wa address"];
+  List<String> addresses = [
+    "filled.count.soap",
+    "not a 3wa",
+    "not.3wa address"
+  ];
 
   // Check if the addresses are possible what3words addresses
   for (String address in addresses) {
@@ -18,7 +21,6 @@ void main() async {
   String typoAddress = "index,home raft";
   bool didYouMean = api.didYouMean3wa(typoAddress);
   print("Did you mean a what3words address with '$typoAddress'? $didYouMean");
-
 
   print("\n-------Example 3: Using findPossible3wa-------\n");
   List<String> texts = [
@@ -49,7 +51,8 @@ void main() async {
     } else if (response.isSuccessful() && response.isValid == false) {
       print("$w3w_address is an invalid what3words address");
     } else {
-      print("isValid3wa error: ${response.error?.code} - ${response.error?.message}");
+      print(
+          "isValid3wa error: ${response.error?.code} - ${response.error?.message}");
     }
   }
 }

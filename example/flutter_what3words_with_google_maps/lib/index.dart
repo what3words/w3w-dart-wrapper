@@ -50,17 +50,16 @@ class MainButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      child: Column(
-          children: <Widget>[
-            Icon(icon, size: 55.0, color: Colors.grey),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(50, 20, 50, 30),
-              child: Text(text,
-                  textAlign: TextAlign.center,
-                  textScaleFactor: 1.5,
-                  style: const TextStyle(color: Colors.grey)),
-            )
-          ]),
+      child: Column(children: <Widget>[
+        Icon(icon, size: 55.0, color: Colors.grey),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(50, 20, 50, 30),
+          child: Text(text,
+              textAlign: TextAlign.center,
+              textScaleFactor: 1.5,
+              style: const TextStyle(color: Colors.grey)),
+        )
+      ]),
       onTap: () => Navigator.of(context).pushNamed(link),
     );
   }

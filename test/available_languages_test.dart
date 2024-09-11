@@ -51,15 +51,17 @@ void main() {
       var found = false;
       for (var language in languages!) {
         if ((language.code.toLowerCase() == 'mn' ||
-            language.code.toLowerCase() == 'zh' ||
-            language.code.toLowerCase() == 'oo') &&
-            language.locales != null && language.locales!.isNotEmpty) {
+                language.code.toLowerCase() == 'zh' ||
+                language.code.toLowerCase() == 'oo') &&
+            language.locales != null &&
+            language.locales!.isNotEmpty) {
           found = true;
         }
       }
 
       // Assert that the specific languages are found
-      expect(found, isTrue, reason: 'Failed to find locale list for zh, mn, or oo');
+      expect(found, isTrue,
+          reason: 'Failed to find locale list for zh, mn, or oo');
     });
   });
 }

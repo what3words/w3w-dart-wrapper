@@ -38,19 +38,20 @@ class LocationFormState extends State<LocationForm> {
     var twaController = TextEditingController();
     var twaInput = TextFormField(
       controller: twaController,
-      decoration: InputDecoration(
-          hintText: 'e.g. lock.spout.radar'
-      ),
+      decoration: InputDecoration(hintText: 'e.g. lock.spout.radar'),
     );
 
     var convertToCoordsButton = ElevatedButton(
       onPressed: () async {
-        var location = await api.convertToCoordinates(twaController.text).execute();
+        var location =
+            await api.convertToCoordinates(twaController.text).execute();
         setState(() {
           if (location.isSuccessful()) {
-            twaHolder = '${location.data()!.coordinates.lat}, ${location.data()!.coordinates.lng}';
+            twaHolder =
+                '${location.data()!.coordinates.lat}, ${location.data()!.coordinates.lng}';
           } else {
-            twaHolder = '${location.error()!.code}: ${location.error()!.message}';
+            twaHolder =
+                '${location.error()!.code}: ${location.error()!.message}';
           }
         });
       },

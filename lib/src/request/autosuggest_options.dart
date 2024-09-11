@@ -24,7 +24,7 @@ class AutosuggestOptions {
   String? get inputType => _inputType;
   String? get language => _language;
   String? get preferLand => _preferLand;
-  String? get locale => _locale; 
+  String? get locale => _locale;
 
   ///Set the number of AutoSuggest results to return. A maximum of 100 results can be specified, if a number greater than this is requested,
   ///this will be truncated to the maximum. The default is 3
@@ -96,9 +96,10 @@ class AutosuggestOptions {
   ///[southWest] Southwest coordinates of the bounding box
   ///[northEast] Northeast coordinates of the bounding box
   ///Returns an [AutosuggestOptions] instance suitable to allow more query customisation
-  AutosuggestOptions setClipToBoundingBox(Coordinates southWest, Coordinates northEast) {
+  AutosuggestOptions setClipToBoundingBox(
+      Coordinates southWest, Coordinates northEast) {
     _clipToBoundingBox =
-    '${southWest.lat},${southWest.lng},${northEast.lat},${northEast.lng}';
+        '${southWest.lat},${southWest.lng},${northEast.lat},${northEast.lng}';
     return this;
   }
 
@@ -127,9 +128,9 @@ class AutosuggestOptions {
     return this;
   }
 
-   /// Sets the locale for the AutoSuggest request
+  /// Sets the locale for the AutoSuggest request
   AutosuggestOptions setLocale(String locale) {
-    _locale = locale;  // Setter for locale
+    _locale = locale; // Setter for locale
     return this;
   }
 
@@ -148,5 +149,4 @@ class AutosuggestOptions {
     _preferLand = '$preferLand';
     return this;
   }
-
 }

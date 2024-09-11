@@ -124,7 +124,6 @@ class _ConvertToCoordinatesPageState extends State<ConvertToCoordinatesPage> {
             initialCameraPosition: _initialPosition,
             onMapCreated: _onMapCreated,
             markers: _markers,
-            
           ),
           Container(
             margin: const EdgeInsets.only(top: 80, right: 10),

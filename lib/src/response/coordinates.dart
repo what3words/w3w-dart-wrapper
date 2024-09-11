@@ -1,4 +1,3 @@
-
 /// A response coordinates
 class CoordinatesResponse {
   double lng;
@@ -21,7 +20,7 @@ CoordinatesResponse _$CoordinatesResponseFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$CoordinatesResponseToJson(
-    CoordinatesResponse instance) =>
+        CoordinatesResponse instance) =>
     <String, dynamic>{
       'lng': instance.lng,
       'lat': instance.lat,

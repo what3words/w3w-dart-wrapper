@@ -49,12 +49,12 @@ class _GridSectionPageState extends State<GridSectionPage> {
       ),
       children: [
         TileLayer(
-            urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-            subdomains: ['a', 'b', 'c'],
-          ),
-          PolylineLayer(
-            polylines: multilines,
-          ),
+          urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+          subdomains: ['a', 'b', 'c'],
+        ),
+        PolylineLayer(
+          polylines: multilines,
+        ),
       ],
     ));
   }

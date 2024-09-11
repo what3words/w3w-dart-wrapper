@@ -7,11 +7,11 @@ void main() {
 
   test('invalid3waTest', () async {
     var locationRequest = await api.convertToCoordinates('filled').execute();
-    
+
     expect(locationRequest.isSuccessful(), false);
 
     var error = locationRequest.error();
-    expect(error, isNotNull);  // Ensure that the error is not null
+    expect(error, isNotNull); // Ensure that the error is not null
 
     if (error != null) {
       if (error == What3WordsError.BAD_WORDS) {
@@ -25,7 +25,8 @@ void main() {
   });
 
   test('valid3waTest', () async {
-    var locationRequest = await api.convertToCoordinates('filled.count.soap').execute();
+    var locationRequest =
+        await api.convertToCoordinates('filled.count.soap').execute();
 
     if (locationRequest.isSuccessful()) {
       expect(locationRequest.isSuccessful(), true);
@@ -47,7 +48,7 @@ void main() {
       expect(location.nearestPlace, 'Bayswater, London');
     } else {
       var error = locationRequest.error();
-      expect(error, isNotNull);  // Ensure that the error is not null
+      expect(error, isNotNull); // Ensure that the error is not null
 
       if (error != null) {
         if (error == What3WordsError.BAD_WORDS) {
@@ -62,9 +63,8 @@ void main() {
   });
   // New test for locale parameter
   test('valid3waWithLocaleTest', () async {
-    var locationRequest = await api
-        .convertToCoordinates('seruuhen.zemseg.dagaldah')
-        .execute();
+    var locationRequest =
+        await api.convertToCoordinates('seruuhen.zemseg.dagaldah').execute();
 
     if (locationRequest.isSuccessful()) {
       expect(locationRequest.isSuccessful(), true);
@@ -73,8 +73,8 @@ void main() {
       expect(location.words, 'seruuhen.zemseg.dagaldah');
       expect(location.country, 'GB');
       expect(location.language, 'mn');
-      expect(location.locale, 'mn_la');  
-      expect(location.nearestPlace, 'Лондон');  
+      expect(location.locale, 'mn_la');
+      expect(location.nearestPlace, 'Лондон');
     } else {
       var error = locationRequest.error();
       expect(error, isNotNull);

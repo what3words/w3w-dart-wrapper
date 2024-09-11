@@ -153,8 +153,8 @@ class _AutoSuggestionPageState extends State<AutoSuggestionPage> {
   }
 
   final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
-    foregroundColor: Colors.blue,  // Replaces 'onPrimary'
-    backgroundColor: Colors.blue[100],  // Replaces 'primary'
+    foregroundColor: Colors.blue, // Replaces 'onPrimary'
+    backgroundColor: Colors.blue[100], // Replaces 'primary'
     minimumSize: const Size(58, 58),
     padding: const EdgeInsets.symmetric(horizontal: 10),
   );

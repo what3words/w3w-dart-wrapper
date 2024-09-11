@@ -15,13 +15,14 @@ class ConvertTo3WARequest extends Request<Location> {
         super(builder.api);
 
   Future<Response<Location>> execute() async {
-    return await super.call(
-        api.what3words().convertTo3wa, [coordinates, language]);
+    return await super
+        .call(api.what3words().convertTo3wa, [coordinates, language]);
   }
 }
 
 /// Builder for `convert-to-3wa` API requests
-class ConvertTo3WARequestBuilder extends AbstractBuilder<Future<Response<Location>>> {
+class ConvertTo3WARequestBuilder
+    extends AbstractBuilder<Future<Response<Location>>> {
   final String _coordinates;
   String? _language;
 

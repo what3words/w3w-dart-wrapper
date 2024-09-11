@@ -13,16 +13,17 @@ class GridSectionRequest extends Request<GridSection> {
         super(builder.api);
 
   Future<Response<GridSection>> execute() async {
-    return await super
-        .call(api.what3words().gridSection, [boundingBox]);
+    return await super.call(api.what3words().gridSection, [boundingBox]);
   }
 }
 
 /// Builder for `grid-section` API requests
-class GridSectionRequestBuilder extends AbstractBuilder<Future<Response<GridSection>>> {
+class GridSectionRequestBuilder
+    extends AbstractBuilder<Future<Response<GridSection>>> {
   final String _boundingBox;
 
-  GridSectionRequestBuilder(super.api, Coordinates southwest, Coordinates northeast)
+  GridSectionRequestBuilder(
+      super.api, Coordinates southwest, Coordinates northeast)
       : _boundingBox =
             '${southwest.lat},${southwest.lng},${northeast.lat},${northeast.lng}';
 

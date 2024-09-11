@@ -21,7 +21,7 @@ abstract class What3WordsV3Service extends ChopperService {
   Future<Response<Location>> convertTo3wa(
       @Query('coordinates') String coordinates,
       @Query('language') String? language);
-      // @Query('locale') String? locale); 
+  // @Query('locale') String? locale);
 
   @Get(path: 'grid-section')
   Future<Response<GridSection>> gridSection(
@@ -40,7 +40,7 @@ abstract class What3WordsV3Service extends ChopperService {
       @Query('input-type') String? inputType,
       @Query('language') String? lang,
       @Query('prefer-land') String? preferLand,
-      @Query('locale') String? locale);  
+      @Query('locale') String? locale);
 
   @Get(path: 'autosuggest-with-coordinates')
   Future<Response<AutosuggestWithCoordinates>> autosuggestWithCoordinates(
@@ -55,7 +55,7 @@ abstract class What3WordsV3Service extends ChopperService {
       @Query('input-type') String? inputType,
       @Query('language') String? lang,
       @Query('prefer-land') String? preferLand,
-      @Query('locale') String? locale);   
+      @Query('locale') String? locale);
 
   @Get(path: 'autosuggest-selection')
   Future<Response<String>> autosuggestSelection(
@@ -73,8 +73,7 @@ abstract class What3WordsV3Service extends ChopperService {
       @Query('input-type') String? inputType,
       @Query('language') String? lang,
       @Query('prefer-land') String? preferLand,
-      @Query('locale') String? locale);  
-
+      @Query('locale') String? locale);
 
   static What3WordsV3Service create(
       String? apiKey, String endpoint, Map<String, String>? headers) {
@@ -87,7 +86,7 @@ abstract class What3WordsV3Service extends ChopperService {
             host: endpoint.split("/")[0],
             path: endpoint.split("/")[1]),
         interceptors: [
-          HeaderInterceptor(apiKey, headers), 
+          HeaderInterceptor(apiKey, headers),
           HttpLoggingInterceptor()
         ],
         errorConverter: JsonConverter(),
@@ -99,7 +98,8 @@ abstract class What3WordsV3Service extends ChopperService {
           Language: (jsonData) => Language.fromJson(jsonData),
           GridSection: (jsonData) => GridSection.fromJson(jsonData),
           Autosuggest: (jsonData) => Autosuggest.fromJson(jsonData),
-          AutosuggestWithCoordinates: (jsonData) => AutosuggestWithCoordinates.fromJson(jsonData)
+          AutosuggestWithCoordinates: (jsonData) =>
+              AutosuggestWithCoordinates.fromJson(jsonData)
         }));
     return _$What3WordsV3Service(client);
   }

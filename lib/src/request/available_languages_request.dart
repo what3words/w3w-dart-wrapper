@@ -9,8 +9,7 @@ class AvailableLanguagesRequest extends Request<Language> {
       : super(builder.api);
 
   Future<Response<Language>> execute() async {
-    return await super
-        .call(api.what3words().availableLanguages, []);
+    return await super.call(api.what3words().availableLanguages, []);
   }
 }
 

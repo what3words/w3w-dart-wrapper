@@ -16,7 +16,7 @@ class AutosuggestRequest extends Request<Autosuggest> {
   final String? inputType;
   final String? language;
   final String? preferLand;
-  final String? locale; 
+  final String? locale;
 
   AutosuggestRequest._builder(AutosuggestRequestBuilder builder)
       : input = builder._input,
@@ -30,7 +30,7 @@ class AutosuggestRequest extends Request<Autosuggest> {
         inputType = builder._options?.inputType,
         language = builder._options?.language,
         preferLand = builder._options?.preferLand,
-        locale = builder._options?.locale, 
+        locale = builder._options?.locale,
         super(builder.api);
 
   Future<Response<Autosuggest>> execute() async {

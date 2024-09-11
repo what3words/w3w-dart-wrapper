@@ -1,4 +1,3 @@
-
 import 'coordinates.dart';
 
 /// A section of the what3words grid
@@ -47,6 +46,6 @@ Line _$LineFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$LineToJson(Line instance) => <String, dynamic>{
-  'start': instance.start.toJson(),
-  'end': instance.end.toJson(),
-};
+      'start': instance.start.toJson(),
+      'end': instance.end.toJson(),
+    };
