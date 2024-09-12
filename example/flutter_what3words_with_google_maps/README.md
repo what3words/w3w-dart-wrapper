@@ -55,7 +55,7 @@ The application is currently using the a Low Quota Google Map API key. This is a
 [get an api key](https://developers.google.com/maps/documentation/javascript/get-api-key).
 
 ```sh
-GOOGLE_MAPS_API_KEY=AIzaSyDcwGyRxRbcNGWOFQVT87A1mkxEOfm8t0w
+GOOGLE_MAPS_API_KEY=ADD-YOUR-GOOGLE-API-KEY
 ```
 
 # Issues
