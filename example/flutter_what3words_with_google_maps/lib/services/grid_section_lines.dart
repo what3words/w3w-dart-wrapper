@@ -1,8 +1,6 @@
 // NOTE
 // this test grid contained hard-coded 20 polylines to not consume the API
 
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_maps/maps.dart';
 

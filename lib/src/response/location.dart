@@ -9,6 +9,7 @@ class Location {
   String words;
   String language;
   String map;
+  String? locale; // Add the locale field, which can be null
 
   Location(
       {required this.country,
@@ -17,7 +18,8 @@ class Location {
       required this.coordinates,
       required this.words,
       required this.language,
-      required this.map});
+      required this.map,
+      this.locale}); // Add locale to the constructor as an optional parameter
 
   factory Location.fromJson(Map<String, dynamic> json) =>
       _$LocationFromJson(json);
@@ -37,7 +39,7 @@ class Square {
   Map<String, dynamic> toJson() => _$SquareToJson(this);
 }
 
-//toJson, fromJson
+// toJson, fromJson
 
 Location _$LocationFromJson(Map<String, dynamic> json) {
   return Location(
@@ -49,29 +51,31 @@ Location _$LocationFromJson(Map<String, dynamic> json) {
     words: json['words'] as String,
     language: json['language'] as String,
     map: json['map'] as String,
+    locale: json['locale'] as String?,
   );
 }
 
 Map<String, dynamic> _$LocationToJson(Location instance) => <String, dynamic>{
-  'country': instance.country,
-  'square': instance.square.toJson(),
-  'nearestPlace': instance.nearestPlace,
-  'coordinates': instance.coordinates.toJson(),
-  'words': instance.words,
-  'language': instance.language,
-  'map': instance.map,
-};
+      'country': instance.country,
+      'square': instance.square.toJson(),
+      'nearestPlace': instance.nearestPlace,
+      'coordinates': instance.coordinates.toJson(),
+      'words': instance.words,
+      'language': instance.language,
+      'map': instance.map,
+      if (instance.locale != null) 'locale': instance.locale,
+    };
 
 Square _$SquareFromJson(Map<String, dynamic> json) {
   return Square(
     southwest:
-    CoordinatesResponse.fromJson(json['southwest'] as Map<String, dynamic>),
+        CoordinatesResponse.fromJson(json['southwest'] as Map<String, dynamic>),
     northeast:
-    CoordinatesResponse.fromJson(json['northeast'] as Map<String, dynamic>),
+        CoordinatesResponse.fromJson(json['northeast'] as Map<String, dynamic>),
   );
 }
 
 Map<String, dynamic> _$SquareToJson(Square instance) => <String, dynamic>{
-  'southwest': instance.southwest.toJson(),
-  'northeast': instance.northeast.toJson(),
-};
+      'southwest': instance.southwest.toJson(),
+      'northeast': instance.northeast.toJson(),
+    };

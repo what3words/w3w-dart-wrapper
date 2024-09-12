@@ -1,11 +1,10 @@
 import 'package:what3words/src/request/request.dart';
-import 'package:what3words/src/response/response.dart';
 
 import '../../what3words.dart';
-import 'autosuggest_options.dart';
 import 'abstract_builder.dart';
 
-class AutosuggestWithCoordinatesRequest extends Request<AutosuggestWithCoordinates> {
+class AutosuggestWithCoordinatesRequest
+    extends Request<AutosuggestWithCoordinates> {
   final String input;
   final String? nResults;
   final String? focus;
@@ -17,8 +16,10 @@ class AutosuggestWithCoordinatesRequest extends Request<AutosuggestWithCoordinat
   final String? inputType;
   final String? language;
   final String? preferLand;
+  final String? locale;
 
-  AutosuggestWithCoordinatesRequest._builder(AutosuggestWithCoordinatesRequestBuilder builder)
+  AutosuggestWithCoordinatesRequest._builder(
+      AutosuggestWithCoordinatesRequestBuilder builder)
       : input = builder._input,
         nResults = builder._options?.nResults,
         focus = builder._options?.focus,
@@ -30,6 +31,7 @@ class AutosuggestWithCoordinatesRequest extends Request<AutosuggestWithCoordinat
         inputType = builder._options?.inputType,
         language = builder._options?.language,
         preferLand = builder._options?.preferLand,
+        locale = builder._options?.locale,
         super(builder.api);
 
   Future<Response<AutosuggestWithCoordinates>> execute() async {
@@ -44,17 +46,21 @@ class AutosuggestWithCoordinatesRequest extends Request<AutosuggestWithCoordinat
       clipToPolygon,
       inputType,
       language,
-      preferLand
+      preferLand,
+      locale
     ]);
   }
 }
 
 /// Builder for `autosuggest-with-coordinates` API requests
-class AutosuggestWithCoordinatesRequestBuilder extends AbstractBuilder<Future<Response<AutosuggestWithCoordinates>>> {
+class AutosuggestWithCoordinatesRequestBuilder
+    extends AbstractBuilder<Future<Response<AutosuggestWithCoordinates>>> {
   final String _input;
   final AutosuggestOptions? _options;
 
-  AutosuggestWithCoordinatesRequestBuilder(What3WordsV3 api, this._input, this._options) : super(api);
+  AutosuggestWithCoordinatesRequestBuilder(
+      What3WordsV3 api, this._input, this._options)
+      : super(api);
 
   ///Execute the API call as represented by the values set within this [ConvertTo3WARequestBuilder]
   ///

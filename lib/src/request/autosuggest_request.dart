@@ -1,9 +1,7 @@
 import 'package:what3words/src/response/response.dart';
-
 import 'autosuggest_options.dart';
 import 'abstract_builder.dart';
 import '../response/autosuggest.dart';
-import '../service/what3words_v3.dart';
 import 'request.dart';
 
 class AutosuggestRequest extends Request<Autosuggest> {
@@ -18,6 +16,7 @@ class AutosuggestRequest extends Request<Autosuggest> {
   final String? inputType;
   final String? language;
   final String? preferLand;
+  final String? locale;
 
   AutosuggestRequest._builder(AutosuggestRequestBuilder builder)
       : input = builder._input,
@@ -31,6 +30,7 @@ class AutosuggestRequest extends Request<Autosuggest> {
         inputType = builder._options?.inputType,
         language = builder._options?.language,
         preferLand = builder._options?.preferLand,
+        locale = builder._options?.locale,
         super(builder.api);
 
   Future<Response<Autosuggest>> execute() async {
@@ -45,21 +45,29 @@ class AutosuggestRequest extends Request<Autosuggest> {
       clipToPolygon,
       inputType,
       language,
-      preferLand
+      preferLand,
+      locale
     ]);
   }
 }
 
 /// Builder for `autosuggest` API requests
-class AutosuggestRequestBuilder extends AbstractBuilder<Future<Response<Autosuggest>>> {
+class AutosuggestRequestBuilder
+    extends AbstractBuilder<Future<Response<Autosuggest>>> {
   final String _input;
   final AutosuggestOptions? _options;
 
-  AutosuggestRequestBuilder(What3WordsV3 api, this._input, this._options) : super(api);
+  AutosuggestRequestBuilder(super.api, this._input, this._options);
 
-  ///Execute the API call as represented by the values set within this [ConvertTo3WARequestBuilder]
+  /// Set locale for the autosuggest request
+  AutosuggestRequestBuilder locale(String locale) {
+    _options?.setLocale(locale); // Setting locale via AutosuggestOptions
+    return this;
+  }
+
+  /// Execute the API call as represented by the values set within this [AutosuggestRequestBuilder]
   ///
-  ///return an [Future<Autosuggest>] representing the response from the what3words API
+  /// return an [Future<Autosuggest>] representing the response from the what3words API
   @override
   Future<Response<Autosuggest>> execute() {
     return AutosuggestRequest._builder(this).execute();

@@ -1,9 +1,7 @@
 import 'package:what3words/src/request/request.dart';
-import 'package:what3words/src/response/response.dart';
 
 import '../../what3words.dart';
 import 'abstract_builder.dart';
-import 'autosuggest_options.dart';
 
 class AutosuggestSelectionRequest extends EmptyRequest {
   final String rawInput;
@@ -20,6 +18,7 @@ class AutosuggestSelectionRequest extends EmptyRequest {
   final String? inputType;
   final String? language;
   final String? preferLand;
+  final String? locale;
 
   AutosuggestSelectionRequest._builder(
       AutosuggestSelectionRequestBuilder builder)
@@ -37,6 +36,7 @@ class AutosuggestSelectionRequest extends EmptyRequest {
         inputType = builder._options?.inputType,
         language = builder._options?.language,
         preferLand = builder._options?.preferLand,
+        locale = builder._options?.locale,
         super(builder.api);
 
   Future<Response<String>> execute() async {
@@ -54,7 +54,8 @@ class AutosuggestSelectionRequest extends EmptyRequest {
       clipToPolygon,
       inputType,
       language,
-      preferLand
+      preferLand,
+      locale
     ]);
   }
 }
@@ -68,9 +69,8 @@ class AutosuggestSelectionRequestBuilder
   final int? _rank;
   final AutosuggestOptions? _options;
 
-  AutosuggestSelectionRequestBuilder(What3WordsV3 api, this._rawInput,
-      this._sourceApi, this._words, this._rank, this._options)
-      : super(api);
+  AutosuggestSelectionRequestBuilder(super.api, this._rawInput, this._sourceApi,
+      this._words, this._rank, this._options);
 
   ///Execute the API call as represented by the values set within this [ConvertTo3WARequestBuilder]
   ///

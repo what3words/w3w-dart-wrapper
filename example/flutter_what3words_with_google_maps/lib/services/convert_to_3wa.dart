@@ -8,7 +8,7 @@ class _ConvertTo3WAPageState extends State<ConvertTo3WAPage> {
   late GoogleMapController mapController;
   late MapType _defaultMapType = MapType.normal;
   final Set<Marker> _markers = {};
-  final api = What3WordsV3('08L3S2A9');
+  final api = What3WordsV3('W3W_API_KEY');
 
   static const _initialPosition = CameraPosition(
     target: LatLng(51.520847, -0.195521),

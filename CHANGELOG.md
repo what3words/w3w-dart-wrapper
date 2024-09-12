@@ -1,3 +1,13 @@
+## 3.2.0
+
+- Update the dependencies
+- Add locales support
+- Add Regex functions
+- Update samples for flutter and dart
+- Handle zero C2C error message
+- Publish to Circle CI
+
+
 ## 3.1.0
 
 - Added null-safety support

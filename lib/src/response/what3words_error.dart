@@ -29,6 +29,7 @@ class What3WordsError {
   static What3WordsError INVALID_KEY = What3WordsError('InvalidKey');
   static What3WordsError UNKNOWN_ERROR = What3WordsError('UnknownError');
   static What3WordsError NETWORK_ERROR = What3WordsError('NetworkError');
+  static What3WordsError QUOTA_EXCEEDED = What3WordsError('QuotaExceeded');
 
   String code;
   String? message;
@@ -40,10 +41,8 @@ class What3WordsError {
         return BAD_COORDINATES;
       case 'BadLanguage':
         return BAD_LANGUAGE;
-
       case 'BadWords':
         return BAD_WORDS;
-
       case 'BadInput':
         return BAD_INPUT;
       case 'BadNResults':
@@ -62,12 +61,10 @@ class What3WordsError {
         return BAD_CLIP_TO_POLYGON;
       case 'BadInputType':
         return BAD_INPUT_TYPE;
-
       case 'BadBoundingBox':
         return BAD_BOUNDING_BOX;
       case 'BadBoundingBoxTooBig':
         return BAD_BOUNDING_BOX_TOO_BIG;
-
       case 'InternalServerError':
         return INTERNAL_SERVER_ERROR;
       case 'InvalidKey':
@@ -76,6 +73,8 @@ class What3WordsError {
         return UNKNOWN_ERROR;
       case 'NetworkError':
         return NETWORK_ERROR;
+      case 'QuotaExceeded':
+        return QUOTA_EXCEEDED;
       default:
         return UNKNOWN_ERROR;
     }

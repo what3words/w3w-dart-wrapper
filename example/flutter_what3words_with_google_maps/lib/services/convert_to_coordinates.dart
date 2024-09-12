@@ -12,7 +12,7 @@ class _ConvertToCoordinatesPageState extends State<ConvertToCoordinatesPage> {
   late String errorMessage;
   late MapType _defaultMapType = MapType.normal;
   final Set<Marker> _markers = {};
-  final api = What3WordsV3('08L3S2A9');
+  final api = What3WordsV3('W3W_API_KEY');
   String twaHolder = '';
   bool isAnError = true;
 
@@ -100,8 +100,7 @@ class _ConvertToCoordinatesPageState extends State<ConvertToCoordinatesPage> {
   }
 
   final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
-    onPrimary: Colors.blue,
-    primary: Colors.blue[100],
+    backgroundColor: Colors.blue, // Use 'backgroundColor' instead of 'primary'
     minimumSize: const Size(58, 58),
     padding: const EdgeInsets.symmetric(horizontal: 10),
   );
@@ -125,7 +124,6 @@ class _ConvertToCoordinatesPageState extends State<ConvertToCoordinatesPage> {
             initialCameraPosition: _initialPosition,
             onMapCreated: _onMapCreated,
             markers: _markers,
-            
           ),
           Container(
             margin: const EdgeInsets.only(top: 80, right: 10),

@@ -26,7 +26,7 @@
   <meta name="apple-mobile-web-app-title" content="w3w_google_flutter">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
   <!-- TODO: Add your Google Maps API key here -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCoALtf1b2EoCKOt81KuQGJ02TGaM9nGaE"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=GOOGLE_MAP_KEY"></script>
 
   <title>w3w_google_flutter</title>
   <link rel="manifest" href="manifest.json">
@@ -36,7 +36,7 @@
        application. For more information, see:
        https://developers.google.com/web/fundamentals/primers/service-workers -->
   <script>
-    var serviceWorkerVersion = null;
+    var serviceWorkerVersion = '{{flutter_service_worker_version}}';
     var scriptLoaded = false;
     function loadMainDartJs() {
       if (scriptLoaded) {
